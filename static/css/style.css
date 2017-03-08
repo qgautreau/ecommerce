@@ -103,10 +103,12 @@ article span {
 }
 .btn-panier {
     border-color: #eab200;
+    background-color: #eab200;
+    color: white;
 }
 .btn-panier:hover {
-    border-color: #eab200;
-    background-color: #eab200;
+    background-color: #ebbe31;
+    color: white;
 }
 
 #contact_main {
@@ -115,47 +117,14 @@ article span {
 }
 
 #contact_form {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
 }
 #contact_form textarea {
     display: block;
     width: 100%;
 }
 
-footer {
-    border: 1px solid #e7e7e7;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-    background-color: #009a66;
-    color: white;
-}
-footer p {
-    text-align: center;
-    margin: .5em 0;
-}
-footer em {
-    font-style: italic;
-    color: #eab200;
-    font-weight:
-}
-
-@media (min-width: 721px) {
-    .navbar ul {
-        width: auto;
-    }
-
-    #search_form {
-        margin-top: 0;
-        margin-bottom: 1em;
-    }
-}
-
 /*Panier*/
-
-#cart h2 {
-    text-align: center;
-}
-
 table {
     margin-bottom: 2em;
 }
@@ -167,7 +136,6 @@ td {
     border: 1px solid #009a66;
 }
 #panier {
-
     border: 1px solid #009a66;
     width: 100%;
     text-transform: capitalize;
@@ -203,7 +171,35 @@ input[type=number] {
     justify-content: space-around;
     flex-wrap: wrap;
 }
-#cart button{
+#cartbuttonsbar button{
     text-transform: capitalize;
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
+}
+
+footer {
+    border: 1px solid #e7e7e7;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    background-color: #009a66;
+    color: white;
+}
+footer p {
+    text-align: center;
+    margin: .5em 0;
+}
+footer em {
+    font-style: italic;
+    color: #eab200;
+    font-weight:
+}
+
+@media (min-width: 721px) {
+    .navbar ul {
+        width: auto;
+    }
+
+    #search_form {
+        margin-top: 0;
+        margin-bottom: 1em;
+    }
 }
