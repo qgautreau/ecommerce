@@ -141,3 +141,17 @@ footer em {
 #cart h2 {
     text-align: center;
 }
+
+#panier {
+    display: table;
+    border: 1px solid #009a66;
+    width: 100%;
+}
+#panier tbody {
+    border: 1px solid #009a66;
+}
+#recap {
+    display: table;
+    border: 1px solid #009a66;
+    width: 100%;
+}

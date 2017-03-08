@@ -27,10 +27,9 @@
             </header>
             <main id="cart">
                 <h2>votre panier</h2>
-                <section>
                     <div class="row">
                         <div class="col-xs-12">
-                            <table>
+                            <table id="panier">
                                 <thead>
                                     <tr>
                                         <th>article</th>
@@ -42,28 +41,45 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>produit 1</td>
-                                        <td></td>
+                                        <td>produit</td>
+                                        <td>100 €</td>
                                         <td>
-                                            <span></span>
-                                            <span></span>
-                                            <span></span>
-                                            <span></span>
+                                            <span>1</span>
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
                                         </td>
-                                        <td></td>
+                                        <td>100€</td>
                                     </tr>
                                 </tbody>
                             </table>
+                            <table id="recap">
+                                <thead></thead>
+                                <tbody>
+                                    <tr>
+                                        <td>total article</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>total ht</td>
+                                        <td>€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>tva</td>
+                                        <td>%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>total ttc</td>
+                                        <td>100€</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div>
+                                <button>retour catalogue</button>
+                                <button>valider panier</button>
+                            </div>
                         </div>
                     </div>
-                </section>
-                <section>
-                    <div class="row">
-                        <div class="col-xs-12">
-
-                        </div>
-                    </div>
-                </section>
             </main>
             <footer>
                 <p>Made by <em>Quentin</em> & <em>Léon</em></p>
