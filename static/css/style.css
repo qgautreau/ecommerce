@@ -180,7 +180,7 @@ input[type=number] {
     justify-content: space-around;
     flex-wrap: wrap;
 }
-#cartbuttonsbar button{
+#cartbuttonsbar *{
     text-transform: capitalize;
     margin-bottom: 4rem;
 }
@@ -199,7 +199,7 @@ footer p {
 footer em {
     font-style: italic;
     color: #eab200;
-    font-weight:
+    font-weight: 700;
 }
 
 @media (min-width: 721px) {
