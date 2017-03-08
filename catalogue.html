@@ -9,10 +9,140 @@
 
         <link rel="stylesheet" href="./static/external/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="./static/css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:500,600,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
     </head>
     <body>
         <div class="container">
-            <h1>Yolo</h1>
+            <header>
+                <h1>E-Commerce</h1>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#">Accueil</a></li>
+                            <li><a href="#">Catalogue</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Panier</a></li>
+                        </ul>
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </header>
+
+            <main>
+                <section>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h2>Catalogue</h2>
+                        </div>
+                        <div class="col-md-4">
+                            <form id="search_form">
+                                <input type="search" placeholder="Search"/>
+                                <label for="tri_item">
+                                    Trier par :
+                                    <select id="tri_item">
+                                        <option>Prix croissant</option>
+                                        <option>Prix décroissant</option>
+                                    </select>
+                                </label>
+                                <input type="submit" value="GO"/>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <article>
+                                <div>
+                                    <img src="http://placehold.it/150x150" alt="Item image"/>
+                                    <h3>Item</h3>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    </p>
+                                </div>
+                                <div>
+                                    <button class='btn btn-default'>Voir</button>
+                                    <button class='btn btn-default btn-panier'>Ajouter au panier</button>
+                                    <span>Prix : 100€</span>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-md-6">
+                            <article>
+                                <div>
+                                    <img src="http://placehold.it/150x150" alt="Item image"/>
+                                    <h3>Item</h3>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    </p>
+                                </div>
+                                <div>
+                                    <button class='btn btn-default'>Voir</button>
+                                    <button class='btn btn-default btn-panier'>Ajouter au panier</button>
+                                    <span>Prix : 100€</span>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <article>
+                                <div>
+                                    <img src="http://placehold.it/150x150" alt="Item image"/>
+                                    <h3>Item</h3>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    </p>
+                                </div>
+                                <div>
+                                    <button class='btn btn-default'>Voir</button>
+                                    <button class='btn btn-default btn-panier'>Ajouter au panier</button>
+                                    <span>Prix : 100€</span>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-md-6">
+                            <article>
+                                <div>
+                                    <img src="http://placehold.it/150x150" alt="Item image"/>
+                                    <h3>Item</h3>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    </p>
+                                </div>
+                                <div>
+                                    <button class='btn btn-default'>Voir</button>
+                                    <button class='btn btn-default btn-panier'>Ajouter au panier</button>
+                                    <span>Prix : 100€</span>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <article>
+                                <div>
+                                    <img src="http://placehold.it/150x150" alt="Item image"/>
+                                    <h3>Item</h3>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    </p>
+                                </div>
+                                <div>
+                                    <button class='btn btn-default'>Voir</button>
+                                    <button class='btn btn-default btn-panier'>Ajouter au panier</button>
+                                    <span>Prix : 100€</span>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <footer>
+                <p>Made by <em>Quentin</em> & <em>Léon</em></p>
+            </footer>
         </div>
 
         <script src="./static/external/jquery/dist/jquery.min.js"></script>

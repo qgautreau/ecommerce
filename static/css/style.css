@@ -16,6 +16,7 @@ h1 {
 
 .navbar {
     background-color: #009a66;
+    margin-bottom: 5rem;
 }
 .navbar ul {
     width: 100%;
@@ -42,9 +43,24 @@ h1 {
 p#presentation {
     text-align: center;
     padding: 0 2em;
-    margin: 5rem 0;
+    margin-bottom: 5rem;
     font-weight: 600;
 }
+
+#search_form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 2em 0;
+    padding: .5em;
+    border: 1px dotted #eab200;
+    border-radius: .5em;
+}
+#search_form input:first-child {
+    width: 100%;
+    margin-bottom: .5em;
+}
+
 section {
     margin-bottom: 3rem;
 }
@@ -112,6 +128,11 @@ footer em {
 @media (min-width: 721px) {
     .navbar ul {
         width: auto;
+    }
+
+    #search_form {
+        margin-top: 0;
+        margin-bottom: 1em;
     }
 }
 
