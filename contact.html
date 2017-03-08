@@ -9,10 +9,51 @@
 
         <link rel="stylesheet" href="./static/external/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="./static/css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:500,600,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
     </head>
     <body>
         <div class="container">
-            <h1></h1>
+            <header>
+                <h1>E-Commerce</h1>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#">Accueil</a></li>
+                            <li><a href="#">Catalogue</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Panier</a></li>
+                        </ul>
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </header>
+
+            <main id="contact_main">
+                <h2>Contact</h2>
+                <form id="contact_form">
+                    <div class="form-group">
+                        <label for="name">Nom</label>
+                        <input type="text" class="form-control" id="name" placeholder="Nom">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Adresse mail</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Sujet du message</label>
+                        <input type="text" class="form-control" id="subject" placeholder="Sujet">
+                    </div>
+                    <div class="form-group">
+                        <label for="msg">Votre message :</label>
+                        <textarea id="msg" rows="10"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-default">Envoyer</button>
+                </form>
+            </main>
+
+            <footer>
+                <p>Made by <em>Quentin</em> & <em>Léon</em></p>
+            </footer>
         </div>
 
         <script src="./static/external/jquery/dist/jquery.min.js"></script>
