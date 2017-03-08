@@ -64,7 +64,7 @@ p#presentation {
 section {
     margin-bottom: 3rem;
 }
-section h2 {
+h2 {
     padding-left: .5em;
     font-weight: 700;
 }
@@ -106,6 +106,19 @@ section article .btn-panier:hover {
 }
 section article span {
     padding: 0 1em;
+}
+
+#contact_main {
+    max-width: 40em;
+    margin: auto;
+}
+
+#contact_form {
+    margin-bottom: 3rem;
+}
+#contact_form textarea {
+    display: block;
+    width: 100%;
 }
 
 footer {
