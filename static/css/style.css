@@ -170,10 +170,10 @@ input[type=number] {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    margin-bottom: 4rem;
 }
 #cartbuttonsbar *{
     text-transform: capitalize;
+    margin-bottom: 4rem;
 }
 
 footer {
