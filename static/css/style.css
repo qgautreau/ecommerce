@@ -40,6 +40,10 @@ h1 {
     padding-left: 0;
 }
 
+#curnt_page {
+    background-color: #09b078;
+}
+
 p#presentation {
     text-align: center;
     padding: 0 2em;
@@ -97,6 +101,10 @@ article span em {
 article span {
     padding: 0 1em;
 }
+section article p {
+    height: 6em;
+    overflow: hidden;
+}
 
 .btn {
     font-weight: 600;
@@ -107,6 +115,7 @@ article span {
     color: white;
 }
 .btn-panier:hover {
+    border-color: #eab200;
     background-color: #ebbe31;
     color: white;
 }
@@ -171,7 +180,7 @@ input[type=number] {
     justify-content: space-around;
     flex-wrap: wrap;
 }
-#cartbuttonsbar button{
+#cartbuttonsbar *{
     text-transform: capitalize;
     margin-bottom: 4rem;
 }
@@ -190,7 +199,7 @@ footer p {
 footer em {
     font-style: italic;
     color: #eab200;
-    font-weight:
+    font-weight: 700;
 }
 
 @media (min-width: 721px) {
