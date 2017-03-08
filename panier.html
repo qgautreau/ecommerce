@@ -4,17 +4,71 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <title>Panier - E-commerce</title>
-
         <link rel="stylesheet" href="./static/external/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="./static/css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:500,600,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
     </head>
     <body>
         <div class="container">
-            <h1>Yolo</h1>
-        </div>
+            <header>
+                <h1>E-Commerce</h1>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#">Accueil</a></li>
+                            <li><a href="#">Catalogue</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Panier</a></li>
+                        </ul>
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </header>
+            <main id="cart">
+                <h2>votre panier</h2>
+                <section>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>article</th>
+                                        <th>prix unitaire</th>
+                                        <th>quantité
+                                        <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></th>
+                                        <th>montant</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>produit 1</td>
+                                        <td></td>
+                                        <td>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="row">
+                        <div class="col-xs-12">
 
+                        </div>
+                    </div>
+                </section>
+            </main>
+            <footer>
+                <p>Made by <em>Quentin</em> & <em>Léon</em></p>
+            </footer>
+        </div>
         <script src="./static/external/jquery/dist/jquery.min.js"></script>
         <script src="./static/external/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="./static/js/script.js"></script>

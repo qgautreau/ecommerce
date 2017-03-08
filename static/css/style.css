@@ -114,3 +114,9 @@ footer em {
         width: auto;
     }
 }
+
+/*Panier*/
+
+#cart h2 {
+    text-align: center;
+}
