@@ -1,0 +1,89 @@
+/*
+Color :
+    Orange : #eab200
+    Vert : #009a66
+*/
+
+h1 {
+    text-align: center;
+}
+
+.navbar {
+    background-color: #009a66;
+}
+.navbar ul {
+    width: 100%;
+}
+.navbar li {
+    text-align: center;
+    padding-right: 1em;
+    padding-left: 1em;
+}
+.navbar-default .navbar-nav > li > a {
+    color: white;
+    font-weight: bold;
+}
+.navbar-default .navbar-nav > li > a:hover {
+    color: #eab200;
+}
+.navbar .container-fluid {
+    display: flex;
+    justify-content: center;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+p#presentation {
+    text-align: center;
+    padding: 0 2em;
+    margin: 5rem 0;
+}
+section {
+    margin-bottom: 3rem;
+}
+section h2 {
+    padding-left: .5em;
+}
+
+section article {
+    border: 2px solid #009a66;
+    border-radius: .4em;
+    margin-bottom: 2rem;
+    overflow: auto;
+    padding: .5em;
+}
+section article img {
+    float: right;
+}
+section article h3 {
+    margin-top: .3em;
+}
+section article span {
+    margin-left: 3.5em;
+}
+section article .btn-panier {
+    border-color: #eab200;
+}
+section article .btn-panier:hover {
+    border-color: #eab200;
+    background-color: #eab200;
+}
+
+footer {
+    border: 2px solid #009a66;
+    margin-bottom: 1rem;
+}
+footer p {
+    text-align: center;
+    margin: .5em 0;
+}
+footer em {
+    font-style: italic;
+    color: #eab200;
+}
+
+@media (min-width: 721px) {
+    .navbar ul {
+        width: auto;
+    }
+}
