@@ -142,16 +142,54 @@ footer em {
     text-align: center;
 }
 
+table {
+    margin-bottom: 2em;
+}
+th {
+    border: 1px solid #009a66;
+    text-align: center;
+}
+td {
+    border: 1px solid #009a66;
+}
 #panier {
-    display: table;
+
     border: 1px solid #009a66;
     width: 100%;
+    text-transform: capitalize;
 }
 #panier tbody {
     border: 1px solid #009a66;
 }
+#panier td {
+    text-align: center;
+}
 #recap {
-    display: table;
     border: 1px solid #009a66;
     width: 100%;
+    text-transform: uppercase;
+}
+
+input[type=number] {
+    border: none;
+    width: 3em;
+    margin: 0.5em 0;
+    text-align: center;
+}
+#recap tbody {
+    text-align: center;
+}
+
+#recap tr td:first-child{
+    text-align: left;
+}
+
+#cartbuttonsbar {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+#cart button{
+    text-transform: capitalize;
+    margin-bottom: 2rem;
 }
