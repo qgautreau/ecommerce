@@ -69,43 +69,44 @@ h2 {
     font-weight: 700;
 }
 
-section article {
+article {
     border: 2px solid #009a66;
     border-radius: .4em;
     margin-bottom: 2rem;
     padding: .5em;
 }
-section article div:first-child {
+article div:first-child {
     overflow: auto;
 }
-section article img {
+article img {
     float: right;
 }
-section article h3 {
+article h3 {
     margin-top: .3em;
     font-weight: 600;
 }
-section article div:last-child {
+article div:last-child {
     margin-top: 1em;
     text-align: right;
 }
-section article span em {
+article span em {
     font-weight: 600;
     font-style: normal;
     font-size: 1.2em;
 }
-section article .btn {
+article span {
+    padding: 0 1em;
+}
+
+.btn {
     font-weight: 600;
 }
-section article .btn-panier {
+.btn-panier {
     border-color: #eab200;
 }
-section article .btn-panier:hover {
+.btn-panier:hover {
     border-color: #eab200;
     background-color: #eab200;
-}
-section article span {
-    padding: 0 1em;
 }
 
 #contact_main {
