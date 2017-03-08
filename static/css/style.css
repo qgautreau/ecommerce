@@ -57,8 +57,10 @@ section article {
     border: 2px solid #009a66;
     border-radius: .4em;
     margin-bottom: 2rem;
-    overflow: auto;
     padding: .5em;
+}
+section article div:first-child {
+    overflow: auto;
 }
 section article img {
     float: right;
@@ -67,8 +69,9 @@ section article h3 {
     margin-top: .3em;
     font-weight: 600;
 }
-section article span {
-    margin-left: 3.5em;
+section article div:last-child {
+    margin-top: 1em;
+    text-align: right;
 }
 section article span em {
     font-weight: 600;
@@ -85,6 +88,9 @@ section article .btn-panier:hover {
     border-color: #eab200;
     background-color: #eab200;
 }
+section article span {
+    padding: 0 1em;
+}
 
 footer {
     border: 1px solid #e7e7e7;
@@ -100,6 +106,7 @@ footer p {
 footer em {
     font-style: italic;
     color: #eab200;
+    font-weight:
 }
 
 @media (min-width: 721px) {
