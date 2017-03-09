@@ -49,7 +49,7 @@ function getRandomProducts(catalog) {
 
     var i=0;
     while (i < 5) {
-        randomIndex = Math.floor(Math.random() * catalog.length-1);
+        randomIndex = Math.floor(Math.random() * catalog.length);
 
         var j=0;
         while (j<randomIndexes.length && randomIndexes[j] != randomIndex) {
@@ -61,6 +61,8 @@ function getRandomProducts(catalog) {
             randomIndexes.push(randomIndex);
         }
     }
+
+    console.log(randomIndexes);
 
     for (var i=0; i<randomIndexes.length; i++) {
         randomProducts.push(catalog[randomIndexes[i]]);
