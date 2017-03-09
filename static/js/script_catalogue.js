@@ -19,4 +19,11 @@ $(document).ready(function() {
         }
         event.preventDefault();
     });
+
+    $("#tri").click(function(event) {
+        order = $("#tri_item").val();
+        console.log(order);
+        displayProducts(catalog, curntPagination);
+        event.preventDefault();
+    });
 });

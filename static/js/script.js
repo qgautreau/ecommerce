@@ -31,7 +31,17 @@ function genProduct(dico, id) {
     return $('<article>').append(firstDiv, lastDiv);
 }
 
+var order = "default";
 function displayProducts(products, startIndex) {
+    console.log("plop "+order);
+    switch(order){
+        case "increase":
+            products = orderPriceIncrease(products);
+            break;
+        case "decrease":
+            products = orderPriceDecrease(products);
+            break;
+    }
     $('article').parent().parent().remove();
     var container = $('main > section');
 
@@ -118,3 +128,27 @@ function setupPagination() {
 var GET_PARAM = function(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 };
+
+function orderPriceDecrease(catalog){
+    var result = [];
+    for(var i = 0; i < catalog.length; i++){
+        var j = 0;
+        while(j < result.length && catalog[i].price < result[j].price){
+            j++;
+        }
+        result.splice(j, 0, catalog[i]);
+    }
+    return result;
+}
+
+function orderPriceIncrease(catalog){
+    var result = [];
+    for(var i = 0; i < catalog.length; i++){
+        var j = 0;
+        while(j < result.length && catalog[i].price > result[j].price){
+            j++;
+        }
+        result.splice(j, 0, catalog[i]);
+    }
+    return result;
+}
