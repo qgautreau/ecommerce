@@ -72,42 +72,40 @@ function getRandomProducts(catalog) {
     return randomProducts;
 }
 
-function genPagination(curntPagination){
+var curntPagination = 0;
+var maxPagination = catalog.length-10;
+
+function setupPagination() {
     $('.paginationItem').remove();
-    var lastPaginationItem = $('#pagination_nav ul li:last-child');
-    console.log(lastPaginationItem);
-    var start = 0;
-    if(curntPagination > 3){
-        start = curntPagination -3;
+
+    var startPag = 0;
+    if (curntPagination > 20) {
+        startPag = curntPagination/10 -2;
+        if (startPag+4 >= maxPagination/10) {
+            startPag = maxPagination/10 - 4;
+        }
     }
-    for(var i = start; i < catalog.length / 10 && i< 5 + start; i++){
+
+    var lastPaginationItem = $('#pagination_nav ul li:last-child');
+
+    for(var i = startPag; i < catalog.length / 10 && i<startPag+5; i++){
         var link = $('<a>').attr({
-            'href': '#',
+            href: '#',
             'class': 'paginationItem'
         }).html(i+1);
+
+        link.click(function(event) {
+            $('article').parent().parent().remove();
+            curntPagination = (parseInt($(this).html()) - 1)*10;
+
+            displayProducts(catalog, curntPagination);
+            setupPagination()
+            event.preventDefault();
+        });
+
         var listElement = $('<li>').append(link);
         lastPaginationItem.before(listElement);
     }
-    $('.pagination li > a').click(function(event) {
-        $('article').parent().parent().remove();
-
-        if ($(this).attr('aria-label')) {
-            if ($(this).attr('aria-label') == 'Previous' && curntPagination > 0) {
-                curntPagination -= 10;
-
-            } else if ($(this).attr('aria-label') == 'Next' && curntPagination+10 <= maxPagination) {
-                curntPagination += 10;
-            }
-
-        } else {
-            curntPagination = (parseInt($(this).html()) - 1)*10;
-        }
-
-        displayProducts(catalog, curntPagination);
-        genPagination(curntPagination);
-        event.preventDefault();
-    });
-
 }
 
 $(document).ready(function() {
@@ -124,10 +122,22 @@ $(document).ready(function() {
 
         case 'Catalogue':
             displayProducts(catalog, 0);
-            var curntPagination = 0;
-            var maxPagination = catalog.length-10;
-            genPagination(curntPagination);
+            setupPagination(0);
             break;
     }
 
+    $('.pagination li > a').click(function(event) { // TODO
+        $('article').parent().parent().remove();
+
+        if ($(this).attr('aria-label') == 'Previous' && curntPagination > 0) {
+            curntPagination -= 10;
+
+        } else if ($(this).attr('aria-label') == 'Next' && curntPagination+10 <= maxPagination) {
+            curntPagination += 10;
+        }
+
+        displayProducts(catalog, curntPagination);
+        setupPagination()
+        event.preventDefault();
+    });
 });
