@@ -25,6 +25,7 @@ function genProduct(dico) {
 }
 
 function displayProducts(products, startIndex) {
+    $('article').parent().parent().remove();
     var container = $('main > section');
 
     var i = startIndex;
@@ -76,7 +77,7 @@ var curntPagination = 0;
 var maxPagination = catalog.length-10;
 
 function setupPagination() {
-    $('.paginationItem').remove();
+    $('.paginationItem').parent().remove();
 
     var startPag = 0;
     if (curntPagination > 20) {
@@ -95,7 +96,6 @@ function setupPagination() {
         }).html(i+1);
 
         link.click(function(event) {
-            $('article').parent().parent().remove();
             curntPagination = (parseInt($(this).html()) - 1)*10;
 
             displayProducts(catalog, curntPagination);
@@ -121,20 +121,22 @@ $(document).ready(function() {
 
         case 'Catalogue':
             displayProducts(catalog, 0);
-            setupPagination(0);
+            setupPagination();
 
             $('.pagination li > a').click(function(event) { // TODO
-                $('article').parent().parent().remove();
-
+                var needUpdate = false;
                 if ($(this).attr('aria-label') == 'Previous' && curntPagination > 0) {
                     curntPagination -= 10;
+                    needUpdate = true;
 
                 } else if ($(this).attr('aria-label') == 'Next' && curntPagination+10 <= maxPagination) {
                     curntPagination += 10;
+                    needUpdate = true;
                 }
-
-                displayProducts(catalog, curntPagination);
-                setupPagination()
+                if(needUpdate){
+                    setupPagination();
+                    displayProducts(catalog, curntPagination);
+                }
                 event.preventDefault();
             });
             break;
