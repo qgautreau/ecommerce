@@ -111,7 +111,6 @@ function setupPagination() {
 $(document).ready(function() {
     console.log('start');
 
-
     var curntPage = $('#curnt_page').find('a').html();
     console.log('Page : ' + curntPage);
 
@@ -123,21 +122,21 @@ $(document).ready(function() {
         case 'Catalogue':
             displayProducts(catalog, 0);
             setupPagination(0);
+
+            $('.pagination li > a').click(function(event) { // TODO
+                $('article').parent().parent().remove();
+
+                if ($(this).attr('aria-label') == 'Previous' && curntPagination > 0) {
+                    curntPagination -= 10;
+
+                } else if ($(this).attr('aria-label') == 'Next' && curntPagination+10 <= maxPagination) {
+                    curntPagination += 10;
+                }
+
+                displayProducts(catalog, curntPagination);
+                setupPagination()
+                event.preventDefault();
+            });
             break;
     }
-
-    $('.pagination li > a').click(function(event) { // TODO
-        $('article').parent().parent().remove();
-
-        if ($(this).attr('aria-label') == 'Previous' && curntPagination > 0) {
-            curntPagination -= 10;
-
-        } else if ($(this).attr('aria-label') == 'Next' && curntPagination+10 <= maxPagination) {
-            curntPagination += 10;
-        }
-
-        displayProducts(catalog, curntPagination);
-        setupPagination()
-        event.preventDefault();
-    });
 });
