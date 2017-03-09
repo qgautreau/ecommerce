@@ -89,7 +89,7 @@ $(document).ready(function() {
 
             var lastPaginationItem = $('#pagination_nav ul li:last-child');
             console.log(lastPaginationItem);
-            for(var i = 0; i < catalog.length / 10; i++){
+            for(var i = 0; i < catalog.length / 10 && i<5; i++){
                 var link = $('<a>').attr('href', '#').html(i+1);
                 var listElement = $('<li>').append(link);
                 lastPaginationItem.before(listElement);
