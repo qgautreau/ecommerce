@@ -36,16 +36,16 @@
                         </div>
                         <div class="col-md-4">
                             <form id="search_form">
-                                <input type="search" placeholder="Search"/>
+                                <input type="search" placeholder="Search" id="search_query"/>
                                 <label for="tri_item">
                                     Trier par :
                                     <select id="tri_item">
-                                        <option>Prix croissant</option>
-                                        <option>Prix décroissant</option>
-                                        <option>Popularité</option>
+                                        <option value="default">Défault</option>
+                                        <option value="increase">Prix croissant</option>
+                                        <option value="decrease">Prix décroissant</option>
                                     </select>
                                 </label>
-                                <input type="submit" value="GO"/>
+                                <input type="submit" value="GO" id="tri"/>
                             </form>
                         </div>
                     </div>
@@ -73,7 +73,8 @@
 
         <script src="static/external/jquery/dist/jquery.min.js"></script>
         <script src="static/external/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="static/js/catalog_x10.js"></script>
+        <script src="static/js/catalog_x100.js"></script>
         <script src="static/js/script.js"></script>
+        <script src="static/js/script_catalogue.js"></script>
     </body>
 </html>

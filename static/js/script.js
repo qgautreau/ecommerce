@@ -1,4 +1,4 @@
-function genProduct(dico) {
+function genProduct(dico, id) {
     var img = $('<img>').attr({
         src: dico.thumb,
         alt: "Item thumb"
@@ -8,10 +8,17 @@ function genProduct(dico) {
 
     var firstDiv = $('<div>').append(img, title, description);
 
-    var linkVoir = $('<a>').attr({
-        'class': 'btn btn-default',
-        href: 'produit.html',
-    }).html('Voir');
+    if(id !== null){
+        var linkVoir = $('<a>').attr({
+            'class': 'btn btn-default',
+            href: 'produit.html?id='+ id,
+        }).html('Voir');
+    }else{
+        var linkVoir = $('<a>').attr({
+            'class': 'btn btn-default',
+            href: 'catalogue.html',
+        }).html('Retour catalogue');
+    }
 
     var addCart = $('<button>').attr({
         'class': 'btn btn-default btn-panier',
@@ -24,7 +31,18 @@ function genProduct(dico) {
     return $('<article>').append(firstDiv, lastDiv);
 }
 
+var order = "default";
 function displayProducts(products, startIndex) {
+    console.log("plop "+order);
+    switch(order){
+        case "increase":
+            products = orderPriceIncrease(products);
+            break;
+        case "decrease":
+            products = orderPriceDecrease(products);
+            break;
+    }
+    $('article').parent().parent().remove();
     var container = $('main > section');
 
     var i = startIndex;
@@ -35,7 +53,7 @@ function displayProducts(products, startIndex) {
         var row = $('<div>').addClass('row');
         while (j<2 && i < products.length) {
             var col = $('<div>').addClass('col-md-6');
-            col.append(genProduct(products[i]));
+            col.append(genProduct(products[i], i));
             row.append(col);
             j++;
             i++;
@@ -72,51 +90,77 @@ function getRandomProducts(catalog) {
     return randomProducts;
 }
 
-$(document).ready(function() {
-    console.log('start');
+var curntPagination = 0;
+var maxPagination = catalog.length-10;
 
+function setupPagination() {
+    $('.paginationItem').parent().remove();
 
-    var curntPage = $('#curnt_page').find('a').html();
-    console.log('Page : ' + curntPage);
-
-    switch (curntPage) {
-        case 'Accueil':
-            displayProducts(getRandomProducts(catalog), 0);
-            break;
-
-        case 'Catalogue':
-            displayProducts(catalog, 0);
-
-            var lastPaginationItem = $('#pagination_nav ul li:last-child');
-            console.log(lastPaginationItem);
-            for(var i = 0; i < catalog.length / 10; i++){
-                var link = $('<a>').attr('href', '#').html(i+1);
-                var listElement = $('<li>').append(link);
-                lastPaginationItem.before(listElement);
-            }
-
-            var curntPagination = 0;
-            var maxPagination = catalog.length-10;
-
-            $('.pagination li > a').click(function(event) {
-                $('article').parent().parent().remove();
-
-                if ($(this).attr('aria-label')) {
-                    if ($(this).attr('aria-label') == 'Previous' && curntPagination > 0) {
-                        curntPagination -= 10;
-
-                    } else if ($(this).attr('aria-label') == 'Next' && curntPagination+10 <= maxPagination) {
-                        curntPagination += 10;
-                    }
-
-                } else {
-                    curntPagination = (parseInt($(this).html()) - 1)*10;
-                }
-
-                displayProducts(catalog, curntPagination);
-                event.preventDefault();
-            });
-            break;
+    var startPag = 0;
+    if (curntPagination > 20) {
+        startPag = curntPagination/10 -2;
+        if (startPag+4 >= maxPagination/10) {
+            startPag = maxPagination/10 - 4;
+        }
     }
 
-});
+    var lastPaginationItem = $('#pagination_nav ul li:last-child');
+
+    for(var i = startPag; i < catalog.length / 10 && i<startPag+5; i++){
+        var link = $('<a>').attr({
+            href: '#',
+            'class': 'paginationItem'
+        }).html(i+1);
+
+        link.click(function(event) {
+            curntPagination = (parseInt($(this).html()) - 1)*10;
+
+            displayProducts(catalog, curntPagination);
+            setupPagination()
+            event.preventDefault();
+        });
+
+        var listElement = $('<li>').append(link);
+        lastPaginationItem.before(listElement);
+    }
+}
+
+var GET_PARAM = function(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+};
+
+function orderPriceDecrease(catalog){
+    var result = [];
+    for(var i = 0; i < catalog.length; i++){
+        var j = 0;
+        while(j < result.length && catalog[i].price < result[j].price){
+            j++;
+        }
+        result.splice(j, 0, catalog[i]);
+    }
+    return result;
+}
+
+function orderPriceIncrease(catalog){
+    var result = [];
+    for(var i = 0; i < catalog.length; i++){
+        var j = 0;
+        while(j < result.length && catalog[i].price > result[j].price){
+            j++;
+        }
+        result.splice(j, 0, catalog[i]);
+    }
+    return result;
+}
+
+function searchProduct(catalog, searchStr) {
+    var result = [];
+    for(var i = 0; i < catalog.length; i++){
+        if(catalog[i].name.indexOf(searchStr) != -1){
+            result.push(catalog[i]);
+        }else if(catalog[i].description.indexOf(searchStr) != -1){
+            result.push(catalog[i]);
+        }
+    }
+    return result;
+}
