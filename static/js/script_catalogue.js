@@ -4,6 +4,7 @@ $(document).ready(function() {
 
     $('.pagination li > a').click(function(event) { // TODO
         var needUpdate = false;
+
         if ($(this).attr('aria-label') == 'Previous' && curntPagination > 0) {
             curntPagination -= 10;
             needUpdate = true;
@@ -12,19 +13,23 @@ $(document).ready(function() {
             curntPagination += 10;
             needUpdate = true;
         }
+
         if(needUpdate){
             setupPagination();
             displayProducts(catalog, curntPagination);
         }
+        
         event.preventDefault();
     });
 
     $("#tri").click(function(event) {
         order = $("#tri_item").val();
         var result = catalog;
+
         if($('#search_query').val() != ""){
             result = searchProduct(catalog, $('#search_query').val() );
         }
+
         displayProducts(result, curntPagination);
         event.preventDefault();
     });
