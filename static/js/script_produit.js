@@ -1,3 +1,17 @@
 $(document).ready(function() {
-    console.log(GET_PARAM('name'));
+    var id = GET_PARAM('id');
+
+    if (!id) {
+        $('main').append($('<span>').html('Erreur : pas de produit selectionné'));
+
+    } else {
+        var product = getProductById(id);
+
+        if (product == null) {
+            $('main').append($('<span>').html("Erreur : ce produit n'est pas disponible"));
+
+        } else {
+            $('main').append(genProduct(product));
+        }
+    }
 });
