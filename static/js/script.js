@@ -3,17 +3,18 @@ function genProduct(dico, id) {
         src: dico.thumb,
         alt: "Item thumb"
     });
+
     var title = $('<h3>').html(dico.name);
     var description = $('<p>').html(dico.description);
-
     var firstDiv = $('<div>').append(img, title, description);
 
-    if(id !== null){
+    if (id !== null) {
         var linkVoir = $('<a>').attr({
             'class': 'btn btn-default',
             href: 'produit.html?id='+ id,
         }).html('Voir');
-    }else{
+
+    } else {
         var linkVoir = $('<a>').attr({
             'class': 'btn btn-default',
             href: 'catalogue.html',
@@ -25,7 +26,6 @@ function genProduct(dico, id) {
     }).html('Ajouter au panier');
 
     var price = $('<span>').html('Prix : ' + dico.price + '€');
-
     var lastDiv = $('<div>').append(linkVoir, addCart, price);
 
     return $('<article>').append(firstDiv, lastDiv);
@@ -33,24 +33,27 @@ function genProduct(dico, id) {
 
 var order = "default";
 function displayProducts(products, startIndex) {
-    console.log("plop "+order);
+    $('article').parent().parent().remove();
+
     switch(order){
         case "increase":
             products = orderPriceIncrease(products);
             break;
+
         case "decrease":
             products = orderPriceDecrease(products);
             break;
     }
-    $('article').parent().parent().remove();
-    var container = $('main > section');
+
 
     var i = startIndex;
     var max = startIndex+10;
-    console.log('Pages : ' + i + ' --> ' + max);
+    var container = $('main > section');
+
     while (i<products.length && i<max) {
         var j=0;
         var row = $('<div>').addClass('row');
+
         while (j<2 && i < products.length) {
             var col = $('<div>').addClass('col-md-6');
             col.append(genProduct(products[i], i));
@@ -58,6 +61,7 @@ function displayProducts(products, startIndex) {
             j++;
             i++;
         }
+
         container.append(row);
     }
 }
@@ -81,8 +85,6 @@ function getRandomProducts(catalog) {
         }
     }
 
-    console.log(randomIndexes);
-
     for (var i=0; i<randomIndexes.length; i++) {
         randomProducts.push(catalog[randomIndexes[i]]);
     }
@@ -99,6 +101,7 @@ function setupPagination() {
     var startPag = 0;
     if (curntPagination > 20) {
         startPag = curntPagination/10 -2;
+
         if (startPag+4 >= maxPagination/10) {
             startPag = maxPagination/10 - 4;
         }
@@ -114,7 +117,6 @@ function setupPagination() {
 
         link.click(function(event) {
             curntPagination = (parseInt($(this).html()) - 1)*10;
-
             displayProducts(catalog, curntPagination);
             setupPagination()
             event.preventDefault();
@@ -129,13 +131,16 @@ var GET_PARAM = function(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 };
 
-function orderPriceDecrease(catalog){
+function orderPriceDecrease(catalog) {
     var result = [];
-    for(var i = 0; i < catalog.length; i++){
+
+    for(var i = 0; i < catalog.length; i++) {
         var j = 0;
-        while(j < result.length && catalog[i].price < result[j].price){
+
+        while(j < result.length && catalog[i].price < result[j].price) {
             j++;
         }
+
         result.splice(j, 0, catalog[i]);
     }
     return result;
@@ -143,11 +148,14 @@ function orderPriceDecrease(catalog){
 
 function orderPriceIncrease(catalog){
     var result = [];
-    for(var i = 0; i < catalog.length; i++){
+
+    for (var i = 0; i < catalog.length; i++) {
         var j = 0;
-        while(j < result.length && catalog[i].price > result[j].price){
+
+        while (j < result.length && catalog[i].price > result[j].price) {
             j++;
         }
+
         result.splice(j, 0, catalog[i]);
     }
     return result;
@@ -155,10 +163,12 @@ function orderPriceIncrease(catalog){
 
 function searchProduct(catalog, searchStr) {
     var result = [];
-    for(var i = 0; i < catalog.length; i++){
-        if(catalog[i].name.indexOf(searchStr) != -1){
+
+    for (var i = 0; i < catalog.length; i++) {
+        if (catalog[i].name.indexOf(searchStr) != -1) {
             result.push(catalog[i]);
-        }else if(catalog[i].description.indexOf(searchStr) != -1){
+
+        } else if (catalog[i].description.indexOf(searchStr) != -1) {
             result.push(catalog[i]);
         }
     }
