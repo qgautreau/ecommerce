@@ -113,6 +113,7 @@ section article p {
     border-color: #eab200;
     background-color: #eab200;
     color: white;
+    margin-left: .5em;
 }
 .btn-panier:hover {
     border-color: #eab200;
@@ -183,6 +184,10 @@ input[type=number] {
 #cartbuttonsbar *{
     text-transform: capitalize;
     margin-bottom: 4rem;
+}
+
+#pagination_nav {
+    text-align: center;
 }
 
 footer {
