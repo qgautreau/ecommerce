@@ -21,7 +21,11 @@ $(document).ready(function() {
 
     $("#tri").click(function(event) {
         order = $("#tri_item").val();
-        displayProducts(catalog, curntPagination);
+        var result = catalog;
+        if($('#search_query').val() != ""){
+            result = searchProduct(catalog, $('#search_query').val() );
+        }
+        displayProducts(result, curntPagination);
         event.preventDefault();
     });
 });

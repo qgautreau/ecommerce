@@ -33,8 +33,7 @@ function genProduct(dico, id) {
 
 var order = "default";
 function displayProducts(products, startIndex) {
-    $('article').parent().parent().remove();
-
+    console.log("plop "+order);
     switch(order){
         case "increase":
             products = orderPriceIncrease(products);
@@ -43,13 +42,12 @@ function displayProducts(products, startIndex) {
             products = orderPriceDecrease(products);
             break;
     }
+    $('article').parent().parent().remove();
+    var container = $('main > section');
 
     var i = startIndex;
     var max = startIndex+10;
     console.log('Pages : ' + i + ' --> ' + max);
-
-    var container = $('main > section');
-
     while (i<products.length && i<max) {
         var j=0;
         var row = $('<div>').addClass('row');
@@ -82,6 +80,8 @@ function getRandomProducts(catalog) {
             randomIndexes.push(randomIndex);
         }
     }
+
+    console.log(randomIndexes);
 
     for (var i=0; i<randomIndexes.length; i++) {
         randomProducts.push(catalog[randomIndexes[i]]);
@@ -127,7 +127,7 @@ function setupPagination() {
 
 var GET_PARAM = function(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
-}
+};
 
 function orderPriceDecrease(catalog){
     var result = [];
@@ -149,6 +149,18 @@ function orderPriceIncrease(catalog){
             j++;
         }
         result.splice(j, 0, catalog[i]);
+    }
+    return result;
+}
+
+function searchProduct(catalog, searchStr) {
+    var result = [];
+    for(var i = 0; i < catalog.length; i++){
+        if(catalog[i].name.indexOf(searchStr) != -1){
+            result.push(catalog[i]);
+        }else if(catalog[i].description.indexOf(searchStr) != -1){
+            result.push(catalog[i]);
+        }
     }
     return result;
 }
