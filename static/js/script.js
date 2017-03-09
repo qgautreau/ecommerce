@@ -72,6 +72,44 @@ function getRandomProducts(catalog) {
     return randomProducts;
 }
 
+function genPagination(curntPagination){
+    $('.paginationItem').remove();
+    var lastPaginationItem = $('#pagination_nav ul li:last-child');
+    console.log(lastPaginationItem);
+    var start = 0;
+    if(curntPagination > 3){
+        start = curntPagination -3;
+    }
+    for(var i = start; i < catalog.length / 10 && i< 5 + start; i++){
+        var link = $('<a>').attr({
+            'href': '#',
+            'class': 'paginationItem'
+        }).html(i+1);
+        var listElement = $('<li>').append(link);
+        lastPaginationItem.before(listElement);
+    }
+    $('.pagination li > a').click(function(event) {
+        $('article').parent().parent().remove();
+
+        if ($(this).attr('aria-label')) {
+            if ($(this).attr('aria-label') == 'Previous' && curntPagination > 0) {
+                curntPagination -= 10;
+
+            } else if ($(this).attr('aria-label') == 'Next' && curntPagination+10 <= maxPagination) {
+                curntPagination += 10;
+            }
+
+        } else {
+            curntPagination = (parseInt($(this).html()) - 1)*10;
+        }
+
+        displayProducts(catalog, curntPagination);
+        genPagination(curntPagination);
+        event.preventDefault();
+    });
+
+}
+
 $(document).ready(function() {
     console.log('start');
 
@@ -86,36 +124,9 @@ $(document).ready(function() {
 
         case 'Catalogue':
             displayProducts(catalog, 0);
-
-            var lastPaginationItem = $('#pagination_nav ul li:last-child');
-            console.log(lastPaginationItem);
-            for(var i = 0; i < catalog.length / 10 && i<5; i++){
-                var link = $('<a>').attr('href', '#').html(i+1);
-                var listElement = $('<li>').append(link);
-                lastPaginationItem.before(listElement);
-            }
-
             var curntPagination = 0;
             var maxPagination = catalog.length-10;
-
-            $('.pagination li > a').click(function(event) {
-                $('article').parent().parent().remove();
-
-                if ($(this).attr('aria-label')) {
-                    if ($(this).attr('aria-label') == 'Previous' && curntPagination > 0) {
-                        curntPagination -= 10;
-
-                    } else if ($(this).attr('aria-label') == 'Next' && curntPagination+10 <= maxPagination) {
-                        curntPagination += 10;
-                    }
-
-                } else {
-                    curntPagination = (parseInt($(this).html()) - 1)*10;
-                }
-
-                displayProducts(catalog, curntPagination);
-                event.preventDefault();
-            });
+            genPagination(curntPagination);
             break;
     }
 
