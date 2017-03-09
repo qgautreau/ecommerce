@@ -24,15 +24,16 @@ function genProduct(dico) {
     return $('<article>').append(firstDiv, lastDiv);
 }
 
-function displayProducts(products) {
+function displayProducts(products, startIndex) {
     var container = $('main > section');
 
-    var i=0;
-    while (i<products.length) {
+    var i = startIndex;
+    var max = startIndex+10;
+    console.log('Pages : ' + i + ' --> ' + max);
+    while (i<products.length && i<max) {
         var j=0;
         var row = $('<div>').addClass('row');
         while (j<2 && i < products.length) {
-            console.log('testki');
             var col = $('<div>').addClass('col-md-6');
             col.append(genProduct(products[i]));
             row.append(col);
@@ -74,16 +75,40 @@ function getRandomProducts(catalog) {
 $(document).ready(function() {
     console.log('start');
 
+
     var curntPage = $('#curnt_page').find('a').html();
     console.log('Page : ' + curntPage);
 
     switch (curntPage) {
         case 'Accueil':
-            displayProducts(getRandomProducts(catalog));
+            displayProducts(getRandomProducts(catalog), 0);
             break;
 
         case 'Catalogue':
-            displayProducts(catalog);
+            displayProducts(catalog, 0);
             break;
     }
+
+    var curntPagination = 0;
+
+    var maxPagination = catalog.length-10;
+
+    $('.pagination li > a').click(function(event) {
+        $('article').parent().parent().remove();
+
+        if ($(this).attr('aria-label')) {
+            if ($(this).attr('aria-label') == 'Previous' && curntPagination > 0) {
+                curntPagination -= 10;
+
+            } else if ($(this).attr('aria-label') == 'Next' && curntPagination+10 <= maxPagination) {
+                curntPagination += 10;
+            }
+
+        } else {
+            curntPagination = (parseInt($(this).html()) - 1)*10;
+        }
+
+        displayProducts(catalog, curntPagination);
+        event.preventDefault();
+    });
 });
