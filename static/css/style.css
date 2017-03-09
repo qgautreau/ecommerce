@@ -113,6 +113,7 @@ section article p {
     border-color: #eab200;
     background-color: #eab200;
     color: white;
+    margin-left: .5em;
 }
 .btn-panier:hover {
     border-color: #eab200;
