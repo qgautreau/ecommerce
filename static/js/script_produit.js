@@ -5,7 +5,7 @@ $(document).ready(function() {
         $('main').append($('<span>').html('Erreur : pas de produit selectionné'));
 
     } else {
-        var product = getProductById(id);
+        var product = catalog[parseInt(id)];
 
         if (product == null) {
             $('main').append($('<span>').html("Erreur : ce produit n'est pas disponible"));
