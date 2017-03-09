@@ -1,4 +1,4 @@
-function genProduct(dico) {
+function genProduct(dico, id) {
     var img = $('<img>').attr({
         src: dico.thumb,
         alt: "Item thumb"
@@ -8,10 +8,17 @@ function genProduct(dico) {
 
     var firstDiv = $('<div>').append(img, title, description);
 
-    var linkVoir = $('<a>').attr({
-        'class': 'btn btn-default',
-        href: 'produit.html',
-    }).html('Voir');
+    if(id !== null){
+        var linkVoir = $('<a>').attr({
+            'class': 'btn btn-default',
+            href: 'produit.html?id='+ id,
+        }).html('Voir');
+    }else{
+        var linkVoir = $('<a>').attr({
+            'class': 'btn btn-default',
+            href: 'catalogue.html',
+        }).html('Retour catalogue');
+    }
 
     var addCart = $('<button>').attr({
         'class': 'btn btn-default btn-panier',
@@ -36,7 +43,7 @@ function displayProducts(products, startIndex) {
         var row = $('<div>').addClass('row');
         while (j<2 && i < products.length) {
             var col = $('<div>').addClass('col-md-6');
-            col.append(genProduct(products[i]));
+            col.append(genProduct(products[i], i));
             row.append(col);
             j++;
             i++;
