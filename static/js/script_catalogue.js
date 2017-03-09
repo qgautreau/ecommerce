@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    console.log('start');
     displayProducts(catalog, 0);
     setupPagination();
 
@@ -22,7 +21,6 @@ $(document).ready(function() {
 
     $("#tri").click(function(event) {
         order = $("#tri_item").val();
-        console.log(order);
         displayProducts(catalog, curntPagination);
         event.preventDefault();
     });
