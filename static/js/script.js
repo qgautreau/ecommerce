@@ -86,29 +86,37 @@ $(document).ready(function() {
 
         case 'Catalogue':
             displayProducts(catalog, 0);
+
+            var lastPaginationItem = $('#pagination_nav ul li:last-child');
+            console.log(lastPaginationItem);
+            for(var i = 0; i < catalog.length / 10; i++){
+                var link = $('<a>').attr('href', '#').html(i+1);
+                var listElement = $('<li>').append(link);
+                lastPaginationItem.before(listElement);
+            }
+
+            var curntPagination = 0;
+            var maxPagination = catalog.length-10;
+
+            $('.pagination li > a').click(function(event) {
+                $('article').parent().parent().remove();
+
+                if ($(this).attr('aria-label')) {
+                    if ($(this).attr('aria-label') == 'Previous' && curntPagination > 0) {
+                        curntPagination -= 10;
+
+                    } else if ($(this).attr('aria-label') == 'Next' && curntPagination+10 <= maxPagination) {
+                        curntPagination += 10;
+                    }
+
+                } else {
+                    curntPagination = (parseInt($(this).html()) - 1)*10;
+                }
+
+                displayProducts(catalog, curntPagination);
+                event.preventDefault();
+            });
             break;
     }
 
-    var curntPagination = 0;
-
-    var maxPagination = catalog.length-10;
-
-    $('.pagination li > a').click(function(event) {
-        $('article').parent().parent().remove();
-
-        if ($(this).attr('aria-label')) {
-            if ($(this).attr('aria-label') == 'Previous' && curntPagination > 0) {
-                curntPagination -= 10;
-
-            } else if ($(this).attr('aria-label') == 'Next' && curntPagination+10 <= maxPagination) {
-                curntPagination += 10;
-            }
-
-        } else {
-            curntPagination = (parseInt($(this).html()) - 1)*10;
-        }
-
-        displayProducts(catalog, curntPagination);
-        event.preventDefault();
-    });
 });
