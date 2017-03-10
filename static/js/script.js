@@ -174,3 +174,25 @@ function searchProduct(catalog, searchStr) {
     }
     return result;
 }
+
+function genPanier(panier, container) {
+    for (var id in panier) {
+        var produit = catalog[parseInt(id)];
+        var row = $('<tr>').append(
+            $('<td>').html(produit.name),
+            $('<td>').html(produit.prix + '€'),
+            $('<td>').append(
+                $('<input>').attr({
+                    type: 'number',
+                    min: 0,
+                }).val(panier[id]),
+                $('<span>').attr(
+                    'class': "glyphicon glyphicon-remove-sign",
+                    'aria-hidden': "true"
+                )
+            ),
+            $('<td>').html((produit.prix * panier[id]) + '€')
+        );
+        container.append(row);
+    }
+}
