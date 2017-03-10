@@ -11,7 +11,7 @@ $(document).ready(function() {
             $('main').append($('<span>').html("Erreur : ce produit n'est pas disponible"));
 
         } else {
-            $('main').append(genProduct(product, null));
+            $('main').append(genProduct(product, id, true));
         }
     }
 });

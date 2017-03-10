@@ -1,4 +1,4 @@
-function genProduct(dico, id) {
+function genProduct(dico, id, isProductPage) {
     var img = $('<img>').attr({
         src: dico.thumb,
         alt: "Item thumb"
@@ -8,7 +8,7 @@ function genProduct(dico, id) {
     var description = $('<p>').html(dico.description);
     var firstDiv = $('<div>').append(img, title, description);
 
-    if (id !== null) {
+    if (!isProductPage) {
         var linkVoir = $('<a>').attr({
             'class': 'btn btn-default',
             href: 'produit.html?id='+ id,
@@ -73,7 +73,9 @@ function displayProducts(products, startIndex) {
 
         while (j<2 && i < products.length) {
             var col = $('<div>').addClass('col-md-6');
-            col.append(genProduct(products[i], i));
+            var productId = products[i].name.split(' ')[1];
+            col.append(genProduct(products[i], productId, false));
+            console.log(i);
             row.append(col);
             j++;
             i++;
