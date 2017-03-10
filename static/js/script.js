@@ -218,6 +218,7 @@ function genPanier(panier, container) {
 
         container.append(row);
     }
+    genPanier();
 }
 
 function addToLocalStorage(id, qty) {
@@ -248,3 +249,23 @@ function removeFromLocalStorage(id) {
     delete panier[id];
     localStorage.setItem('panier', JSON.stringify(panier));
 }
+
+function genTotalPanier(panier) {
+    var panier = localStorage.getItem('panier');
+    panier = JSON.parse(panier);
+    var totalPrice = 0;
+    for(var id in panier) {
+        var produit = catalog[parseInt(id)];
+        var qty = parseInt(panier[id]);
+        var prix = parseInt(produit.price);
+        totalPrice += qty * prix;
+    }
+    var totalArticles = panier.length;
+    var totalPriceHt = totalPrice / 1.2;
+    var tva = totalPrice - totalPriceHt;
+
+    $('#recap_qty').html(totalArticles);
+    $('#recap_tva').html(tva + "€");
+    $('#recap_total_ht').html(totalPriceHt + '€');
+    $('#recap_total_ttc').html(totalPrice + '€');
+};
