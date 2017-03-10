@@ -40,13 +40,13 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>produit</td>
+                                        <!-- <td>produit</td>
                                         <td>100 €</td>
                                         <td>
                                             <input type="number" min=0>
                                             <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
                                         </td>
-                                        <td>100€</td>
+                                        <td>100€</td> -->
                                     </tr>
                                 </tbody>
                             </table>
@@ -55,19 +55,19 @@
                                     <tbody>
                                         <tr>
                                             <td>total article</td>
-                                            <td>1</td>
+                                            <td id="recap_qty">1</td>
                                         </tr>
                                         <tr>
                                             <td>total ht</td>
-                                            <td>€</td>
+                                            <td id="recap_total_ht">€</td>
                                         </tr>
                                         <tr>
-                                            <td>tva</td>
-                                            <td>%</td>
+                                            <td>tva 20%</td>
+                                            <td id="recap_tva"></td>
                                         </tr>
                                         <tr>
                                             <td>total ttc</td>
-                                            <td>100€</td>
+                                            <td id="recap_total_ttc">100€</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -76,7 +76,7 @@
                     </div>
                     <div id="cartbuttonsbar">
                         <a href="catalogue.html" class="btn btn-default">retour catalogue</a>
-                        <button class="btn btn-danger">vider le panier</button>
+                        <button id='clear_panier' class="btn btn-danger">vider le panier</button>
                         <button class="btn btn-default btn-panier">valider panier</button>
                     </div>
             </main>
@@ -86,6 +86,8 @@
         </div>
         <script src="static/external/jquery/dist/jquery.min.js"></script>
         <script src="static/external/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="static/js/catalog_x100.js"></script>
         <script src="static/js/script.js"></script>
+        <script src="static/js/script_panier.js"></script>
     </body>
 </html>
