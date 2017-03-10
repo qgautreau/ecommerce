@@ -162,6 +162,10 @@ td {
     text-transform: uppercase;
 }
 
+.glyphicon-remove-sign {
+    cursor: pointer;
+}
+
 input[type=number] {
     border: none;
     width: 3em;

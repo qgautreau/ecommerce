@@ -218,7 +218,7 @@ function genPanier(panier, container) {
 
         container.append(row);
     }
-    genPanier();
+    genTotalPanier(panier);
 }
 
 function addToLocalStorage(id, qty) {
