@@ -75,7 +75,6 @@ function displayProducts(products, startIndex) {
             var col = $('<div>').addClass('col-md-6');
             var productId = products[i].name.split(' ')[1];
             col.append(genProduct(products[i], productId, false));
-            console.log(i);
             row.append(col);
             j++;
             i++;
@@ -111,11 +110,10 @@ function getRandomProducts(catalog) {
     return randomProducts;
 }
 
-var curntPagination = 0;
-var maxPagination = catalog.length-10;
-
-function setupPagination() {
+function setupPagination(page) {
+    var curntPagination = page*10
     $('.paginationItem').parent().remove();
+    var maxPagination = catalog.length-10;
 
     var startPag = 0;
     if (curntPagination > 20) {
@@ -126,24 +124,29 @@ function setupPagination() {
         }
     }
 
-    var lastPaginationItem = $('#pagination_nav ul li:last-child');
+    var paginationUl = $('#pagination_nav ul');
+
+    var pagiPrevious = $('<li>').append($('<a>').attr({
+        href: page > 0 ? '?page=' + (parseInt(page)) : '',
+        'aria-label': 'Previous'
+    }).html('<span aria-hidden="true">&laquo;</span>'));
+    paginationUl.append(pagiPrevious);
 
     for(var i = startPag; i < catalog.length / 10 && i<startPag+5; i++){
         var link = $('<a>').attr({
-            href: '#',
+            'href': '?page=' + (i+1),
             'class': 'paginationItem'
         }).html(i+1);
 
-        link.click(function(event) {
-            curntPagination = (parseInt($(this).html()) - 1)*10;
-            displayProducts(catalog, curntPagination);
-            setupPagination()
-            event.preventDefault();
-        });
-
         var listElement = $('<li>').append(link);
-        lastPaginationItem.before(listElement);
+        paginationUl.append(listElement);
     }
+
+    var pagiNext = $('<li>').append($('<a>').attr({
+        href: page < maxPagination/10 ? '?page=' + (parseInt(page)+2) : '',
+        'aria-label': 'Next'
+    }).html('<span aria-hidden="true">&raquo;</span>'));
+    paginationUl.append(pagiNext);
 }
 
 var GET_PARAM = function(name) {
