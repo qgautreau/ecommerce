@@ -23,7 +23,13 @@ function genProduct(dico, id) {
 
     var addCart = $('<button>').attr({
         'class': 'btn btn-default btn-panier',
+        'id': id
     }).html('Ajouter au panier');
+
+    addCart.click(function() {
+        addToLocalStorage($(this).attr('id'), '1');
+        $(this).html('Produit ajouté');
+    });
 
     var price = $('<span>').html('Prix : ' + dico.price + '€');
     var lastDiv = $('<div>').append(linkVoir, addCart, price);
@@ -173,4 +179,19 @@ function searchProduct(catalog, searchStr) {
         }
     }
     return result;
+}
+
+function addToLocalStorage(id, qty) {
+
+    var panier = localStorage.getItem('panier');
+    if(panier == null) {
+        panier = {};
+        panier[id] = qty;
+        localStorage.setItem('panier', JSON.stringify(panier));
+
+    } else {
+        panier = JSON.parse(panier);
+        panier[id] = qty;
+        localStorage.setItem('panier', JSON.stringify(panier));
+    }
 }
