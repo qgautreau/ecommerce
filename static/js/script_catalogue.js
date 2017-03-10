@@ -22,7 +22,7 @@ $(document).ready(function() {
 
         sessionStorage.setItem('search_query', $('#search_query').val());
 
-        location.reload();
+        window.location.href = "catalogue.html";
         event.preventDefault();
     });
 });
