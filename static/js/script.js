@@ -83,6 +83,10 @@ function displayProducts(products, startIndex) {
 
         container.append(row);
     }
+
+    if (products.length > 10) {
+        setupPagination(startIndex/10, products.length);
+    }
 }
 
 function getRandomProducts(catalog) {
@@ -111,10 +115,10 @@ function getRandomProducts(catalog) {
     return randomProducts;
 }
 
-function setupPagination(page) {
+function setupPagination(page, nbProduct) {
     var curntPagination = page*10
     $('.paginationItem').parent().remove();
-    var maxPagination = catalog.length-10;
+    var maxPagination = nbProduct-10;
 
     var startPag = 0;
     if (curntPagination > 20) {
@@ -133,7 +137,7 @@ function setupPagination(page) {
     }).html('<span aria-hidden="true">&laquo;</span>'));
     paginationUl.append(pagiPrevious);
 
-    for(var i = startPag; i < catalog.length / 10 && i<startPag+5; i++){
+    for(var i = startPag; i < nbProduct / 10 && i<startPag+5; i++){
         var link = $('<a>').attr({
             'href': '?page=' + (i+1),
             'class': 'paginationItem'

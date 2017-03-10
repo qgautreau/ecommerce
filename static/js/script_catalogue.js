@@ -16,14 +16,13 @@ $(document).ready(function() {
     }
 
     displayProducts(catalog, page*10);
-    setupPagination(page);
 
     $("#tri").click(function(event) {
         sessionStorage.setItem('order', $("#tri_item").val())
 
         sessionStorage.setItem('search_query', $('#search_query').val());
 
-        displayProducts(result, page*10);
+        location.reload();
         event.preventDefault();
     });
 });
