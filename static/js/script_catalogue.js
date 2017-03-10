@@ -1,43 +1,29 @@
 $(document).ready(function() {
     var page = GET_PARAM('page');
-    console.log(page);
+
     if (!page) {
         page = 0;
     } else {
         page--;
     }
+
+    if (sessionStorage.getItem('order')) {
+        $("#tri_item").val(sessionStorage.getItem('order'));
+    }
+
+    if (sessionStorage.getItem('search_query')) {
+        $('#search_query').val(sessionStorage.getItem('search_query'))
+    }
+
     displayProducts(catalog, page*10);
     setupPagination(page);
 
-    // $('.class="pagination_dir"').click(function(event) {
-    //     var needUpdate = false;
-    //
-    //     if ($(this).attr('aria-label') == 'Previous' && curntPagination > 0) {
-    //         curntPagination -= 10;
-    //         needUpdate = true;
-    //
-    //     } else if ($(this).attr('aria-label') == 'Next' && curntPagination+10 <= maxPagination) {
-    //         curntPagination += 10;
-    //         needUpdate = true;
-    //     }
-    //
-    //     if(needUpdate){
-    //         setupPagination();
-    //         displayProducts(catalog, curntPagination);
-    //     }
-    //
-    //     // event.preventDefault();
-    // });
-
     $("#tri").click(function(event) {
-        order = $("#tri_item").val();
-        var result = catalog;
+        sessionStorage.setItem('order', $("#tri_item").val())
 
-        if($('#search_query').val() != ""){
-            result = searchProduct(catalog, $('#search_query').val() );
-        }
+        sessionStorage.setItem('search_query', $('#search_query').val());
 
-        displayProducts(result, curntPagination);
+        displayProducts(result, page*10);
         event.preventDefault();
     });
 });
