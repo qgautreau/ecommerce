@@ -23,7 +23,13 @@ function genProduct(dico, id) {
 
     var addCart = $('<button>').attr({
         'class': 'btn btn-default btn-panier',
+        'id': id
     }).html('Ajouter au panier');
+
+    addCart.click(function() {
+        addToLocalStorage($(this).attr('id'), '1');
+        $(this).html('Produit ajouté');
+    });
 
     var price = $('<span>').html('Prix : ' + dico.price + '€');
     var lastDiv = $('<div>').append(linkVoir, addCart, price);
@@ -176,23 +182,69 @@ function searchProduct(catalog, searchStr) {
 }
 
 function genPanier(panier, container) {
+    container.empty();
     for (var id in panier) {
         var produit = catalog[parseInt(id)];
+        var changeQty = $('<input>').attr({
+            type: 'number',
+            min: 1,
+        }).val(panier[id]);
+
+        changeQty.change(function() {
+            var id = $(this).parent().parent().attr('id');
+            updateLocalStorageQty(id, $(this).val())
+            panier = JSON.parse(localStorage.getItem('panier'));
+            genPanier(panier, $('#panier > tbody'));
+        });
+
+        var removeItem = $('<span>').attr({
+            'class': "glyphicon glyphicon-remove-sign",
+            'aria-hidden': "true"
+        })
+
+        removeItem.click(function() {
+            var id = $(this).parent().parent().attr('id');
+            removeFromLocalStorage(id);
+            panier = JSON.parse(localStorage.getItem('panier'));
+            genPanier(panier, $('#panier > tbody'));
+        });
+
         var row = $('<tr>').append(
             $('<td>').html(produit.name),
-            $('<td>').html(produit.prix + '€'),
-            $('<td>').append(
-                $('<input>').attr({
-                    type: 'number',
-                    min: 0,
-                }).val(panier[id]),
-                $('<span>').attr(
-                    'class': "glyphicon glyphicon-remove-sign",
-                    'aria-hidden': "true"
-                )
-            ),
-            $('<td>').html((produit.prix * panier[id]) + '€')
-        );
+            $('<td>').html(parseInt(produit.price) + '€'),
+            $('<td>').append(changeQty, removeItem),
+            $('<td>').html((parseInt(produit.price) * parseInt(panier[id])) + '€')
+        ).attr('id', id);
+
         container.append(row);
     }
+}
+
+function addToLocalStorage(id, qty) {
+    var panier = localStorage.getItem('panier');
+
+    if(panier == null) {
+        panier = {};
+        panier[id] = qty;
+        localStorage.setItem('panier', JSON.stringify(panier));
+
+    } else {
+        panier = JSON.parse(panier);
+        panier[id] = qty;
+        localStorage.setItem('panier', JSON.stringify(panier));
+    }
+}
+
+function updateLocalStorageQty(id, qty) {
+    var panier = localStorage.getItem('panier');
+    panier = JSON.parse(panier);
+    panier[id] = qty;
+    localStorage.setItem('panier', JSON.stringify(panier));
+}
+
+function removeFromLocalStorage(id) {
+    var panier = localStorage.getItem('panier');
+    panier = JSON.parse(panier);
+    delete panier[id];
+    localStorage.setItem('panier', JSON.stringify(panier));
 }
