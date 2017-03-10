@@ -145,21 +145,31 @@ th {
 td {
     border: 1px solid #009a66;
 }
+
 #panier {
-    border: 1px solid #009a66;
     width: 100%;
     text-transform: capitalize;
 }
-#panier tbody {
-    border: 1px solid #009a66;
+#panier th {
+    width: 25%;
 }
 #panier td {
     text-align: center;
+    width: 25%;
 }
+
 #recap {
-    border: 1px solid #009a66;
     width: 100%;
     text-transform: uppercase;
+}
+#recap tbody {
+    text-align: center;
+}
+#recap tr td:first-child {
+    text-align: left;
+}
+#recap tr td:last-child {
+    width: 8em;
 }
 
 .glyphicon-remove-sign {
@@ -171,13 +181,6 @@ input[type=number] {
     width: 3em;
     margin: 0.5em 0;
     text-align: center;
-}
-#recap tbody {
-    text-align: center;
-}
-
-#recap tr td:first-child{
-    text-align: left;
 }
 
 #cartbuttonsbar {

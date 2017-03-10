@@ -1,4 +1,4 @@
-function genProduct(dico, id) {
+function genProduct(dico, id, isProductPage) {
     var img = $('<img>').attr({
         src: dico.thumb,
         alt: "Item thumb"
@@ -8,7 +8,7 @@ function genProduct(dico, id) {
     var description = $('<p>').html(dico.description);
     var firstDiv = $('<div>').append(img, title, description);
 
-    if (id !== null) {
+    if (!isProductPage) {
         var linkVoir = $('<a>').attr({
             'class': 'btn btn-default',
             href: 'produit.html?id='+ id,
@@ -24,11 +24,22 @@ function genProduct(dico, id) {
     var addCart = $('<button>').attr({
         'class': 'btn btn-default btn-panier',
         'id': id
-    }).html('Ajouter au panier');
-
-    addCart.click(function() {
+    }).html('Ajouter au panier')
+    .popover({
+        content: 'Ce produit à été ajouté au panier.',
+        placement: 'bottom',
+        trigger: 'manual'
+    })
+    .click(function() {
         addToLocalStorage($(this).attr('id'), '1');
-        $(this).html('Produit ajouté');
+        // $(this).html('Produit ajouté');
+        $(this).popover('show');
+        $(this).addClass('popover_tmp');
+        setTimeout(function() {
+            $('.popover_tmp').popover('hide');
+            $('.popover_tmp').removeClass('popover_tmp');
+        }, 1500);
+
     });
 
     var price = $('<span>').html('Prix : ' + dico.price + '€');
@@ -62,7 +73,8 @@ function displayProducts(products, startIndex) {
 
         while (j<2 && i < products.length) {
             var col = $('<div>').addClass('col-md-6');
-            col.append(genProduct(products[i], i));
+            var productId = products[i].name.split(' ')[1];
+            col.append(genProduct(products[i], productId, false));
             row.append(col);
             j++;
             i++;
@@ -98,11 +110,10 @@ function getRandomProducts(catalog) {
     return randomProducts;
 }
 
-var curntPagination = 0;
-var maxPagination = catalog.length-10;
-
-function setupPagination() {
+function setupPagination(page) {
+    var curntPagination = page*10
     $('.paginationItem').parent().remove();
+    var maxPagination = catalog.length-10;
 
     var startPag = 0;
     if (curntPagination > 20) {
@@ -113,24 +124,29 @@ function setupPagination() {
         }
     }
 
-    var lastPaginationItem = $('#pagination_nav ul li:last-child');
+    var paginationUl = $('#pagination_nav ul');
+
+    var pagiPrevious = $('<li>').append($('<a>').attr({
+        href: page > 0 ? '?page=' + (parseInt(page)) : '',
+        'aria-label': 'Previous'
+    }).html('<span aria-hidden="true">&laquo;</span>'));
+    paginationUl.append(pagiPrevious);
 
     for(var i = startPag; i < catalog.length / 10 && i<startPag+5; i++){
         var link = $('<a>').attr({
-            href: '#',
+            'href': '?page=' + (i+1),
             'class': 'paginationItem'
         }).html(i+1);
 
-        link.click(function(event) {
-            curntPagination = (parseInt($(this).html()) - 1)*10;
-            displayProducts(catalog, curntPagination);
-            setupPagination()
-            event.preventDefault();
-        });
-
         var listElement = $('<li>').append(link);
-        lastPaginationItem.before(listElement);
+        paginationUl.append(listElement);
     }
+
+    var pagiNext = $('<li>').append($('<a>').attr({
+        href: page < maxPagination/10 ? '?page=' + (parseInt(page)+2) : '',
+        'aria-label': 'Next'
+    }).html('<span aria-hidden="true">&raquo;</span>'));
+    paginationUl.append(pagiNext);
 }
 
 var GET_PARAM = function(name) {
@@ -182,6 +198,9 @@ function searchProduct(catalog, searchStr) {
 }
 
 function genPanier(panier, container) {
+    if (panier == null) {
+        return;
+    }
     container.empty();
     for (var id in panier) {
         var produit = catalog[parseInt(id)];
@@ -192,7 +211,7 @@ function genPanier(panier, container) {
 
         changeQty.change(function() {
             var id = $(this).parent().parent().attr('id');
-            updateLocalStorageQty(id, $(this).val())
+            addToLocalStorage(id, $(this).val())
             panier = JSON.parse(localStorage.getItem('panier'));
             genPanier(panier, $('#panier > tbody'));
         });
@@ -236,13 +255,6 @@ function addToLocalStorage(id, qty) {
     }
 }
 
-function updateLocalStorageQty(id, qty) {
-    var panier = localStorage.getItem('panier');
-    panier = JSON.parse(panier);
-    panier[id] = qty;
-    localStorage.setItem('panier', JSON.stringify(panier));
-}
-
 function removeFromLocalStorage(id) {
     var panier = localStorage.getItem('panier');
     panier = JSON.parse(panier);
@@ -260,9 +272,10 @@ function genTotalPanier(panier) {
         var prix = parseInt(produit.price);
         totalPrice += qty * prix;
     }
-    var totalArticles = panier.length;
-    var totalPriceHt = totalPrice / 1.2;
+    var totalArticles = Object.keys(panier).length;
+    var totalPriceHt = Math.round(totalPrice / 1.2 * 100)/100;
     var tva = totalPrice - totalPriceHt;
+    tva = Math.round(tva * 100)/100;
 
     $('#recap_qty').html(totalArticles);
     $('#recap_tva').html(tva + "€");
