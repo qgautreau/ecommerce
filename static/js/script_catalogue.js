@@ -2,7 +2,7 @@ $(document).ready(function() {
     displayProducts(catalog, 0);
     setupPagination();
 
-    $('.pagination li > a').click(function(event) { // TODO
+    $('.pagination li > a').click(function(event) {
         var needUpdate = false;
 
         if ($(this).attr('aria-label') == 'Previous' && curntPagination > 0) {
@@ -18,7 +18,7 @@ $(document).ready(function() {
             setupPagination();
             displayProducts(catalog, curntPagination);
         }
-        
+
         event.preventDefault();
     });
 
