@@ -192,7 +192,7 @@ function genPanier(panier, container) {
 
         changeQty.change(function() {
             var id = $(this).parent().parent().attr('id');
-            updateLocalStorageQty(id, $(this).val())
+            addToLocalStorage(id, $(this).val())
             panier = JSON.parse(localStorage.getItem('panier'));
             genPanier(panier, $('#panier > tbody'));
         });
@@ -236,13 +236,6 @@ function addToLocalStorage(id, qty) {
     }
 }
 
-function updateLocalStorageQty(id, qty) {
-    var panier = localStorage.getItem('panier');
-    panier = JSON.parse(panier);
-    panier[id] = qty;
-    localStorage.setItem('panier', JSON.stringify(panier));
-}
-
 function removeFromLocalStorage(id) {
     var panier = localStorage.getItem('panier');
     panier = JSON.parse(panier);
@@ -260,9 +253,10 @@ function genTotalPanier(panier) {
         var prix = parseInt(produit.price);
         totalPrice += qty * prix;
     }
-    var totalArticles = panier.length;
-    var totalPriceHt = totalPrice / 1.2;
+    var totalArticles = Object.keys(panier).length;
+    var totalPriceHt = Math.round(totalPrice / 1.2 * 100)/100;
     var tva = totalPrice - totalPriceHt;
+    tva = Math.round(tva * 100)/100;
 
     $('#recap_qty').html(totalArticles);
     $('#recap_tva').html(tva + "€");
