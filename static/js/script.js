@@ -1,3 +1,4 @@
+// Génération produit
 function genProduct(dico, id, isProductPage) {
     var img = $('<img>').attr({
         src: dico.thumb,
@@ -46,7 +47,7 @@ function genProduct(dico, id, isProductPage) {
 
     return $('<article>').append(firstDiv, lastDiv);
 }
-
+// Affichage des produits
 function displayProducts(products, startIndex) {
     $('article').parent().parent().remove();
 
@@ -74,7 +75,7 @@ function displayProducts(products, startIndex) {
         setupPagination(startIndex/10, products.length);
     }
 }
-
+// Affichage top produits en page d'accueil (produits aléatoires)
 function getRandomProducts(catalog) {
     var randomProducts = [];
     var randomIndexes = [];
@@ -100,7 +101,7 @@ function getRandomProducts(catalog) {
 
     return randomProducts;
 }
-
+// Créer la barre de pagination
 function setupPagination(page, nbProduct) {
     var curntPagination = page*10
     $('.paginationItem').parent().remove();
@@ -139,11 +140,11 @@ function setupPagination(page, nbProduct) {
     }).html('<span aria-hidden="true">&raquo;</span>'));
     paginationUl.append(pagiNext);
 }
-
+// récupartion id produits pour panier
 var GET_PARAM = function(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 };
-
+// Trier par prix décroissant
 function orderPriceDecrease(catalog) {
     var result = [];
 
@@ -158,7 +159,7 @@ function orderPriceDecrease(catalog) {
     }
     return result;
 }
-
+// Trier par prix croissant
 function orderPriceIncrease(catalog){
     var result = [];
 
@@ -173,7 +174,7 @@ function orderPriceIncrease(catalog){
     }
     return result;
 }
-
+// Rechercher un produit
 function searchProduct(catalog, searchStr) {
     var result = [];
 
@@ -187,7 +188,7 @@ function searchProduct(catalog, searchStr) {
     }
     return result;
 }
-
+// Génération du panier
 function genPanier(panier, container) {
     if (panier == null) {
         return;
@@ -233,7 +234,7 @@ function genPanier(panier, container) {
     }
     genTotalPanier(panier);
 }
-
+// Stockage des informations pour le panier
 function addToLocalStorage(id, qty) {
     var panier = localStorage.getItem('panier');
 
@@ -248,14 +249,14 @@ function addToLocalStorage(id, qty) {
         localStorage.setItem('panier', JSON.stringify(panier));
     }
 }
-
+// Vider le panier
 function removeFromLocalStorage(id) {
     var panier = localStorage.getItem('panier');
     panier = JSON.parse(panier);
     delete panier[id];
     localStorage.setItem('panier', JSON.stringify(panier));
 }
-
+// Génarer le panier total
 function genTotalPanier(panier) {
     var panier = localStorage.getItem('panier');
     panier = JSON.parse(panier);

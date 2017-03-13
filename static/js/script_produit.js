@@ -1,3 +1,4 @@
+// Affichage fiche produit
 $(document).ready(function() {
     var id = GET_PARAM('id');
 
