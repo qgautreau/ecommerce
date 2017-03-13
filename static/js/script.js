@@ -31,7 +31,7 @@ function genProduct(dico, id, isProductPage) {
         trigger: 'manual'
     })
     .click(function() {
-        addToLocalStorage($(this).attr('id'), '1');
+        addToLocalStorage($(this).attr('id'));
         $(this).popover('show');
         $(this).addClass('popover_tmp');
         setTimeout(function() {
@@ -205,7 +205,7 @@ function genPanier(panier, container) {
 
         changeQty.change(function() {
             var id = $(this).parent().parent().attr('id');
-            addToLocalStorage(id, $(this).val())
+            setToLocalStorage(id, $(this).val())
             panier = JSON.parse(localStorage.getItem('panier'));
             genPanier(panier, $('#panier > tbody'));
         });
@@ -234,7 +234,7 @@ function genPanier(panier, container) {
     genTotalPanier(panier);
 }
 
-function addToLocalStorage(id, qty) {
+function setToLocalStorage(id, qty) {
     var panier = localStorage.getItem('panier');
 
     if (panier == null) {
@@ -245,6 +245,26 @@ function addToLocalStorage(id, qty) {
     } else {
         panier = JSON.parse(panier);
         panier[id] = qty;
+        localStorage.setItem('panier', JSON.stringify(panier));
+    }
+}
+
+function addToLocalStorage(id) {
+    var panier = localStorage.getItem('panier');
+
+    if (panier == null) {
+        panier = {};
+        panier[id] = 1;
+        localStorage.setItem('panier', JSON.stringify(panier));
+
+    } else {
+        panier = JSON.parse(panier);
+        if (panier[id]) {
+            panier[id] = parseInt(panier[id]) + 1;
+
+        } else {
+            panier[id] = 1;
+        }
         localStorage.setItem('panier', JSON.stringify(panier));
     }
 }
