@@ -79,8 +79,10 @@ function getRandomProducts(catalog) {
     var randomProducts = [];
     var randomIndexes = [];
 
+    var max = catalog.length > 5 ? 5 : catalog.length;
+
     var i=0;
-    while (i < 5) {
+    while (i < max) {
         randomIndex = Math.floor(Math.random() * catalog.length);
 
         var j=0;
