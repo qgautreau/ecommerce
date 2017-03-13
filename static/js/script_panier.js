@@ -11,5 +11,6 @@ $(document).ready(function() {
         $('#recap_tva').html('0€');
         $('#recap_total_ht').html('0€');
         $('#recap_total_ttc').html('0€');
+        updatePanierCount();
     });
 });

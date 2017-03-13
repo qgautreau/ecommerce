@@ -255,6 +255,7 @@ function setToLocalStorage(id, qty) {
         panier[id] = qty;
         localStorage.setItem('panier', JSON.stringify(panier));
     }
+    updatePanierCount();
 }
 
 function addToLocalStorage(id) {
@@ -275,6 +276,7 @@ function addToLocalStorage(id) {
         }
         localStorage.setItem('panier', JSON.stringify(panier));
     }
+    updatePanierCount();
 }
 
 function removeFromLocalStorage(id) {
@@ -282,6 +284,7 @@ function removeFromLocalStorage(id) {
     panier = JSON.parse(panier);
     delete panier[id];
     localStorage.setItem('panier', JSON.stringify(panier));
+    updatePanierCount();
 }
 
 function genTotalPanier(panier) {
@@ -306,3 +309,20 @@ function genTotalPanier(panier) {
     $('#recap_total_ht').html(totalPriceHt + '€');
     $('#recap_total_ttc').html(totalPrice + '€');
 };
+
+function updatePanierCount() {
+    var total = 0;
+    var panier = localStorage.getItem('panier');
+    if (panier != null) {
+        panier = JSON.parse(panier);
+        for (var id in panier) {
+            total += parseInt(panier[id]);
+            console.log(total);
+        }
+        $('#item_count').html('( ' + total + ' )');
+    }
+}
+
+$(document).ready(function() {
+    updatePanierCount();
+});
