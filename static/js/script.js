@@ -50,20 +50,6 @@ function genProduct(dico, id, isProductPage) {
 function displayProducts(products, startIndex) {
     $('article').parent().parent().remove();
 
-    switch(sessionStorage.getItem('order')){
-        case "increase":
-            products = orderPriceIncrease(products);
-            break;
-
-        case "decrease":
-            products = orderPriceDecrease(products);
-            break;
-    }
-
-    if (sessionStorage.getItem('search_query')) {
-        products = searchProduct(products, sessionStorage.getItem('search_query'));
-    }
-
     var i = startIndex;
     var max = startIndex+10;
     var container = $('main > section');
