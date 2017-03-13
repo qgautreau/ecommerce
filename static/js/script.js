@@ -32,7 +32,6 @@ function genProduct(dico, id, isProductPage) {
     })
     .click(function() {
         addToLocalStorage($(this).attr('id'), '1');
-        // $(this).html('Produit ajouté');
         $(this).popover('show');
         $(this).addClass('popover_tmp');
         setTimeout(function() {
@@ -48,20 +47,8 @@ function genProduct(dico, id, isProductPage) {
     return $('<article>').append(firstDiv, lastDiv);
 }
 
-var order = "default";
 function displayProducts(products, startIndex) {
     $('article').parent().parent().remove();
-
-    switch(order){
-        case "increase":
-            products = orderPriceIncrease(products);
-            break;
-
-        case "decrease":
-            products = orderPriceDecrease(products);
-            break;
-    }
-
 
     var i = startIndex;
     var max = startIndex+10;
@@ -81,6 +68,10 @@ function displayProducts(products, startIndex) {
         }
 
         container.append(row);
+    }
+
+    if (products.length > 10) {
+        setupPagination(startIndex/10, products.length);
     }
 }
 
@@ -110,10 +101,10 @@ function getRandomProducts(catalog) {
     return randomProducts;
 }
 
-function setupPagination(page) {
+function setupPagination(page, nbProduct) {
     var curntPagination = page*10
     $('.paginationItem').parent().remove();
-    var maxPagination = catalog.length-10;
+    var maxPagination = nbProduct-10;
 
     var startPag = 0;
     if (curntPagination > 20) {
@@ -132,7 +123,7 @@ function setupPagination(page) {
     }).html('<span aria-hidden="true">&laquo;</span>'));
     paginationUl.append(pagiPrevious);
 
-    for(var i = startPag; i < catalog.length / 10 && i<startPag+5; i++){
+    for(var i = startPag; i < nbProduct / 10 && i<startPag+5; i++){
         var link = $('<a>').attr({
             'href': '?page=' + (i+1),
             'class': 'paginationItem'
@@ -156,10 +147,10 @@ var GET_PARAM = function(name) {
 function orderPriceDecrease(catalog) {
     var result = [];
 
-    for(var i = 0; i < catalog.length; i++) {
+    for (var i = 0; i < catalog.length; i++) {
         var j = 0;
 
-        while(j < result.length && catalog[i].price < result[j].price) {
+        while (j < result.length && catalog[i].price < result[j].price) {
             j++;
         }
 
@@ -201,9 +192,12 @@ function genPanier(panier, container) {
     if (panier == null) {
         return;
     }
+
     container.empty();
+
     for (var id in panier) {
         var produit = catalog[parseInt(id)];
+
         var changeQty = $('<input>').attr({
             type: 'number',
             min: 1,
@@ -243,7 +237,7 @@ function genPanier(panier, container) {
 function addToLocalStorage(id, qty) {
     var panier = localStorage.getItem('panier');
 
-    if(panier == null) {
+    if (panier == null) {
         panier = {};
         panier[id] = qty;
         localStorage.setItem('panier', JSON.stringify(panier));
@@ -266,12 +260,14 @@ function genTotalPanier(panier) {
     var panier = localStorage.getItem('panier');
     panier = JSON.parse(panier);
     var totalPrice = 0;
-    for(var id in panier) {
+
+    for( var id in panier) {
         var produit = catalog[parseInt(id)];
         var qty = parseInt(panier[id]);
         var prix = parseInt(produit.price);
         totalPrice += qty * prix;
     }
+
     var totalArticles = Object.keys(panier).length;
     var totalPriceHt = Math.round(totalPrice / 1.2 * 100)/100;
     var tva = totalPrice - totalPriceHt;
