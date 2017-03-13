@@ -11,7 +11,8 @@ function genPanier(panier, container) {
         var changeQty = $('<input>').attr({
             type: 'number',
             min: 1,
-            max: 999
+            max: 999,
+            class: 'itemqty'
         }).val(panier[id]);
 
         changeQty.change(function() {
@@ -55,14 +56,15 @@ function genTotalPanier(panier) {
     panier = JSON.parse(panier);
     var totalPrice = 0;
 
+    var totalArticles = 0;
     for( var id in panier) {
         var produit = catalog[parseInt(id)];
         var qty = parseInt(panier[id]);
         var prix = parseInt(produit.price);
         totalPrice += qty * prix;
+        totalArticles += qty;
     }
 
-    var totalArticles = Object.keys(panier).length;
     var totalPriceHt = Math.round(totalPrice / 1.2 * 100)/100;
     var tva = totalPrice - totalPriceHt;
     tva = Math.round(tva * 100)/100;
