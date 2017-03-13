@@ -201,10 +201,16 @@ function genPanier(panier, container) {
         var changeQty = $('<input>').attr({
             type: 'number',
             min: 1,
+            max: 999
         }).val(panier[id]);
 
         changeQty.change(function() {
             var id = $(this).parent().parent().attr('id');
+            if ($(this).val() > 999) {
+                $(this).val(999);
+            } else if ($(this).val() < 1) {
+                $(this).val(1);
+            }
             setToLocalStorage(id, $(this).val())
             panier = JSON.parse(localStorage.getItem('panier'));
             genPanier(panier, $('#panier > tbody'));
