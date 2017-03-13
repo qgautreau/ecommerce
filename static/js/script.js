@@ -319,8 +319,8 @@ function updatePanierCount() {
             total += parseInt(panier[id]);
             console.log(total);
         }
-        $('#item_count').html('( ' + total + ' )');
     }
+    $('#item_count').html('( ' + total + ' )');
 }
 
 $(document).ready(function() {
