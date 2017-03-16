@@ -1,0 +1,94 @@
+$color0: #ebbe31;
+$color1: #eab200;
+$color2: #009a66;
+$color3: #05af75;
+
+@import 'navbar';
+@import 'panier';
+@import 'articles';
+
+body {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+}
+
+h1 {
+    margin: 0.7em 0;
+    text-align: center;
+    font-family: 'Kaushan Script', cursive;
+}
+
+p#presentation {
+    text-align: center;
+    padding: 0 2em;
+    margin-bottom: 5rem;
+    font-weight: 600;
+}
+
+#search_form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 2em 0;
+    padding: .5em;
+    border: 1px dotted $color1;
+    border-radius: .5em;
+
+    input:first-child {
+        width: 100%;
+        margin-bottom: .5em;
+    }
+}
+
+h2 {
+    padding-left: .5em;
+    font-weight: 700;
+}
+
+#contact_main {
+    max-width: 40em;
+    margin: auto;
+}
+
+#contact_form {
+    margin-bottom: 4rem;
+
+    textarea {
+        display: block;
+        width: 100%;
+    }
+}
+
+#pagination_nav {
+    text-align: center;
+}
+
+footer {
+    border: 1px solid #e7e7e7;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    background-color: $color2;
+    color: white;
+
+    p {
+        text-align: center;
+        margin: .5em 0;
+    }
+
+    em {
+        font-style: italic;
+        color: $color1;
+        font-weight: 700;
+    }
+}
+
+@media (min-width: 721px) {
+    .navbar ul {
+        width: auto;
+    }
+
+    #search_form {
+        margin-top: 0;
+        margin-bottom: 1em;
+    }
+}

@@ -1,0 +1,63 @@
+table {
+    margin-bottom: 2em;
+}
+th {
+    border: 1px solid $color2;
+    text-align: center;
+}
+td {
+    border: 1px solid $color2;
+}
+
+#panier {
+    width: 100%;
+    text-transform: capitalize;
+
+    th {
+        width: 25%;
+    }
+
+    td {
+        text-align: center;
+        width: 25%;
+    }
+}
+
+#recap {
+    width: 100%;
+    text-transform: uppercase;
+
+    tbody {
+        text-align: center;
+    }
+
+    tr td:first-child {
+        text-align: left;
+    }
+
+    tr td:last-child {
+        width: 8em;
+    }
+}
+
+.glyphicon-remove-sign {
+    cursor: pointer;
+}
+
+input[type=number] {
+    border: none;
+    width: 3em;
+    margin: 0.5em 0;
+    text-align: center;
+}
+
+#cartbuttonsbar {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    * {
+        text-transform: capitalize;
+        margin-bottom: 4rem;
+    }
+}

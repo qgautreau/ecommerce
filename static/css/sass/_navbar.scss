@@ -1,0 +1,33 @@
+.navbar {
+    background-color: $color2;
+    margin-bottom: 5rem;
+
+    ul {
+        width: 100%;
+    }
+
+    li {
+        text-align: center;
+        padding-right: 1em;
+        padding-left: 1em;
+    }
+
+    .container-fluid {
+        display: flex;
+        justify-content: center;
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: white;
+    font-weight: bold;
+}
+.navbar-default .navbar-nav > li > a:hover {
+    color: $color1;
+}
+
+#curnt_page {
+    background-color: $color3;
+}

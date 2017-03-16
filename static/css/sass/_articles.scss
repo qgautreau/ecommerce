@@ -1,0 +1,59 @@
+article {
+    border: 2px solid $color1;
+    border-radius: .4em;
+    margin-bottom: 2rem;
+    padding: .5em;
+
+    div:first-child {
+        overflow: auto;
+    }
+
+    img {
+        float: right;
+    }
+
+    h3 {
+        margin-top: .3em;
+        font-weight: 600;
+    }
+
+    div:last-child {
+        margin-top: 1em;
+        text-align: right;
+    }
+
+    span {
+        padding: 0 1em;
+
+        em {
+            font-weight: 600;
+            font-style: normal;
+            font-size: 1.2em;
+        }
+    }
+}
+
+section {
+    margin-bottom: 3rem;
+
+    article p {
+        height: 6em;
+        overflow: hidden;
+    }
+}
+
+.btn {
+    font-weight: 600;
+}
+.btn-panier {
+    border-color: $color1;
+    background-color: $color1;
+    color: white;
+    margin-left: .5em;
+
+    &:hover {
+        border-color: $color1;
+        background-color: $color0;
+        color: white;
+    }
+}
