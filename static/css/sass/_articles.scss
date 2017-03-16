@@ -22,6 +22,16 @@ article {
         text-align: right;
     }
 
+    .pictures {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        img {
+            margin: .4em;
+        }
+    }
+
     span {
         padding: 0 1em;
 

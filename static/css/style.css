@@ -84,6 +84,12 @@ article {
   article div:last-child {
     margin-top: 1em;
     text-align: right; }
+  article .pictures {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; }
+    article .pictures img {
+      margin: .4em; }
   article span {
     padding: 0 1em; }
     article span em {
