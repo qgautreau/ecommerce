@@ -12,6 +12,12 @@ $(document).ready(function() {
 
         } else {
             $('main').append(genProduct(product, id, true));
+
+            var container = $('<div class="pictures">');
+            for (var i=0; i<product.pictures.length; i++) {
+                container.append($('<img alt="Product description picture" src=' + product.pictures[i] + '>'));
+            }
+            $('main > article > div:first-child').after(container);
         }
     }
 });
