@@ -122,3 +122,32 @@ $(document).ready(function() {
         event.preventDefault();
     });
 });
+
+
+$(document).ready(function(){
+    $.ajax({
+        url: "https://codi-e-commerce.herokuapp.com/",
+        type: "GET",
+        dataType: "json",
+        success: function(objects, status){
+            for(var key in objects){
+                var product = objects[key];
+                var productContainer= $("<div class ='panel panel-default'></div>");
+                var productThumb = $("<img>").html(product.thumb);
+                var productName = $("<h3 class='panel-title'></h3>").html(product.name).css({
+                    "textTransform": "capitalize"
+                });
+                var productDescription = $("<p></p>").html(product.description);
+                var productPrice = $("").html(product.price);
+                var productQty = $("").html(product.quantity);
+                var productPictures = "";
+                for(var i = 0; i < product.pictures.length; i++){
+                    productPictures += $("<img>").attr({
+                        src : product.pictures
+                    });
+                }
+
+            }
+        }
+    });
+});
