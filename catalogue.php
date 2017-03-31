@@ -20,7 +20,7 @@
                     <div class="container-fluid">
                         <ul class="nav navbar-nav">
                             <li><a href="index.php">Accueil</a></li>
-                            <li id="curnt_page"><a href="catalogue.html">Catalogue</a></li>
+                            <li id="curnt_page"><a href="catalogue.php">Catalogue</a></li>
                             <li><a href="panier.html">Panier <em id="item_count">(0)</em></a></li>
                             <li><a href="contact.html">Contact</a></li>
                         </ul>
@@ -49,6 +49,45 @@
                             </form>
                         </div>
                     </div>
+                    <?php
+                    define('MYSQL_SERVEUR', 'localhost');
+                    define('MYSQL_UTILISATEUR', 'toto');
+                    define('MYSQL_MOTDEPASSE', 'yolo');
+                    define('MYSQL_BASE', 'Shop');
+
+                    $mysql = new MySQLi(MYSQL_SERVEUR,
+                    MYSQL_UTILISATEUR,
+                    MYSQL_MOTDEPASSE,
+                    MYSQL_BASE);
+
+                    $mysql->set_charset("utf8");
+
+                    $sql = 'SELECT * FROM Product';
+
+                    $result = $mysql->query($sql);
+
+                    while (NULL !== ($row = $result->fetch_array())) {
+                        echo "<div class='row'>";
+                        echo "<div class='col-md-6 col-lg-6'>";
+                        echo "<article>";
+                        echo "<div>";
+                        echo "<img src='http://placehold.it/140x140' alt='image produit' $row[id]";
+                        echo "<h3>$row[name]</h3>";
+                        echo "<p>$row[description]</p>";
+                        echo "</div>";
+                        echo "<div>";
+                        echo "<a class='btn btn-default' href='produit.php'>Voir</a>";
+                        echo "<button class='btn btn-default btn-panier'>Ajouter au panier</button>";
+                        echo "<span>Prix\n$row[price]€</span>";
+                        echo "</div>";
+                        echo "</article>";
+                        echo "</div>";
+                        echo "</div>";
+                    }
+
+                    $result->free();
+                    $mysql->close();
+                    ?>
                 </section>
 
                 <nav id="pagination_nav" aria-label="Page navigation">
@@ -64,5 +103,7 @@
 
         <script src="static/external/jquery/dist/jquery.min.js"></script>
         <script src="static/external/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
     </body>
 </html>

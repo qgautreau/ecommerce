@@ -19,8 +19,8 @@
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
                         <ul class="nav navbar-nav">
-                            <li id="curnt_page"><a href="index.html">Accueil</a></li>
-                            <li><a href="catalogue.html">Catalogue</a></li>
+                            <li id="curnt_page"><a href="index.php">Accueil</a></li>
+                            <li><a href="catalogue.php">Catalogue</a></li>
                             <li><a href="panier.html">Panier <em id="item_count">(0)</em></a></li>
                             <li><a href="contact.html">Contact</a></li>
                         </ul>
@@ -45,8 +45,30 @@
 
         <script src="static/external/jquery/dist/jquery.min.js"></script>
         <script src="static/external/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="static/js/catalog_x100.js"></script>
-        <script src="static/js/script.js"></script>
-        <script src="static/js/script_home.js"></script>
+
+        <?php
+            define('MYSQL_SERVEUR', 'localhost');
+            define('MYSQL_UTILISATEUR', 'toto');
+            define('MYSQL_MOTDEPASSE', 'yolo');
+            define('MYSQL_BASE', 'Shop');
+
+            $mysql = new MySQLi(MYSQL_SERVEUR,
+                                MYSQL_UTILISATEUR,
+                                MYSQL_MOTDEPASSE,
+                                MYSQL_BASE);
+
+            $mysql->set_charset("utf8");
+
+            $sql = 'SELECT * FROM Product';
+
+            $result = $mysql->query($sql);
+
+            while ($row = $result->fetch_assoc()) {
+                echo $row['name']." ".$row['description']." ".$row['price']."<br>";
+            }
+
+            $result->free();
+            $mysql->close();
+        ?>
     </body>
 </html>

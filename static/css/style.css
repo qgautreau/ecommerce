@@ -74,7 +74,7 @@ h2 {
 }
 
 article {
-    border: 2px solid #009a66;
+    border: 2px solid #eab200;
     border-radius: .4em;
     margin-bottom: 2rem;
     padding: .5em;
@@ -84,6 +84,11 @@ article div:first-child {
 }
 article img {
     float: right;
+    box-sizing: border-box;
+}
+
+.product-picture {
+    float: left;
 }
 article h3 {
     margin-top: .3em;
