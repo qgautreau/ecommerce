@@ -12,19 +12,7 @@
     </head>
     <body>
         <div class="container">
-            <header>
-                <h1>E-Commerce</h1>
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <ul class="nav navbar-nav">
-                            <li><a href="index.php">Accueil</a></li>
-                            <li><a href="catalogue.php">Catalogue</a></li>
-                            <li id="curnt_page"><a href="panier.html">Panier <em id="item_count">(0)</em></a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </header>
+            <?php include "header.php";?>
             <main>
                 <h2>Votre panier</h2>
                     <div class="row">
@@ -71,9 +59,7 @@
                         <button class="btn btn-default btn-panier">valider panier</button>
                     </div>
             </main>
-            <footer>
-                <p>Made by <em>Quentin</em> & <em>Léon</em></p>
-            </footer>
+            <?php include "footer.php";?>
         </div>
 
         <script src="static/external/jquery/dist/jquery.min.js"></script>

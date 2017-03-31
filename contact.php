@@ -14,20 +14,7 @@
     </head>
     <body>
         <div class="container">
-            <header>
-                <h1>E-Commerce</h1>
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <ul class="nav navbar-nav">
-                            <li><a href="index.php">Accueil</a></li>
-                            <li><a href="catalogue.php">Catalogue</a></li>
-                            <li><a href="panier.html">Panier <em id="item_count">(0)</em></a></li>
-                            <li id="curnt_page"><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </header>
-
+            <?php include "header.php";?>
             <main id="contact_main">
                 <h2>Contact</h2>
                 <form id="contact_form">
@@ -50,10 +37,7 @@
                     <button type="submit" class="btn btn-default">Envoyer</button>
                 </form>
             </main>
-
-            <footer>
-                <p>Made by <em>Quentin</em> & <em>Léon</em></p>
-            </footer>
+            <?php include "footer.php";?>
         </div>
 
         <script src="static/external/jquery/dist/jquery.min.js"></script>

@@ -82,10 +82,7 @@
                     </ul>
                 </nav>
             </main>
-
-            <footer>
-                <p>Made by <em>Quentin</em> & <em>Léon</em></p>
-            </footer>
+            <?php include "footer.php";?>
         </div>
 
         <script src="static/external/jquery/dist/jquery.min.js"></script>
