@@ -14,20 +14,7 @@
     </head>
     <body>
         <div class="container">
-            <header>
-                <h1>E-Commerce</h1>
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <ul class="nav navbar-nav">
-                            <li><a href="index.php">Accueil</a></li>
-                            <li id="curnt_page"><a href="catalogue.php">Catalogue</a></li>
-                            <li><a href="panier.html">Panier <em id="item_count">(0)</em></a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </header>
-
+            <?php include "header.php";?>
             <main>
                 <section>
                     <div class="row">
@@ -76,7 +63,7 @@
                         echo "<p>$row[description]</p>";
                         echo "</div>";
                         echo "<div>";
-                        echo "<a class='btn btn-default' href='produit.php'>Voir</a>";
+                        echo "<a class='btn btn-default' href='produit.php?index=$row[id]'>Voir</a>";
                         echo "<button class='btn btn-default btn-panier'>Ajouter au panier</button>";
                         echo "<span>Prix\n$row[price]€</span>";
                         echo "</div>";

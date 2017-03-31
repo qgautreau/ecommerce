@@ -14,20 +14,7 @@
     </head>
     <body>
         <div class="container">
-            <header>
-                <h1>E-Commerce</h1>
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <ul class="nav navbar-nav">
-                            <li><a href="index.php">Accueil</a></li>
-                            <li><a href="catalogue.php">Catalogue</a></li>
-                            <li><a href="panier.html">Panier <em id="item_count">(0)</em></a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </header>
-
+            <?php include "header.php";?>
             <main>
                 <?php
                     define('MYSQL_SERVEUR', 'localhost');
@@ -41,8 +28,9 @@
                     MYSQL_BASE);
 
                     $mysql->set_charset("utf8");
+                    $id = $_GET["index"];
 
-                    $sql = 'SELECT * FROM Product';
+                    $sql = 'SELECT * FROM Product WHERE id ='. $id.';';
 
                     $result = $mysql->query($sql);
 
@@ -55,11 +43,8 @@
                     echo "<h3>$row[name]</h3>";
                     echo "<p>$row[description]</p>";
                     echo "</div>";
-                    echo "<div class='pictures'>";
-                    echo "<img src='http://placehold.it/200x200' alt='image produit $row[id]' class='product-picture'>";
-                    echo "</div>";
                     echo "<div>";
-                    echo "<a class='btn btn-default' href='produit.php'>Voir</a>";
+                    echo "<a class='btn btn-default' href='catalogue.php'>Retour au catalogue</a>";
                     echo "<button class='btn btn-default btn-panier'>Ajouter au panier</button>";
                     echo "<span>Prix\n$row[price]€</span>";
                     echo "</div>";
